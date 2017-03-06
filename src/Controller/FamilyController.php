@@ -11,7 +11,7 @@ use App\Controller\AppController;
 
 class FamilyController extends AppController{
     
-    function index()
+    function gestion()
     {
         
         
