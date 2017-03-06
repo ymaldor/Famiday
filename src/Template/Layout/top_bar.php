@@ -19,7 +19,7 @@
 						</div>
 						<!-- top-bar-right -->
 						<div class="top-bar-right">
-						</div>
+					
 							<div class="notifications">
 								<ul>
 									<!-- notification: inbox -->

@@ -12,7 +12,7 @@ use App\Controller\AppController;
 
 class MessengerController extends AppController{
     
-    function index()
+    function newmessage()
     {
         
         
