@@ -13,7 +13,6 @@ class CalendarController extends AppController{
     
     function index()
     {
-        
-        
+	
     }
 }

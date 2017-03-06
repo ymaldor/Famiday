@@ -1,3 +1,4 @@
+/.github/*
 /bin/*
 /config/*
 /logs/*
@@ -5,7 +6,6 @@
 /tests/*
 /tmp/*
 /vendor/*
-/.github/*
 
 *.editorconfig
 *.htaccess

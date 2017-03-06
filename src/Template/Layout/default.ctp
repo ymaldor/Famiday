@@ -17,53 +17,63 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-    
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-    <?= $this->fetch('assets') ?>
-    <?= $this->Html->css('bootstrap.min.css') ?>
-	<?= $this->Html->css('font-awesome.min.css') ?>
-	<?= $this->Html->css('main.css') ?>
-	<?= $this->Html->css('my-custom-styles.css') ?>
-	<?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
-	<?= $this->Html->script('bootstrap/bootstrap.js') ?>
-	<?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
-	<?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
-	<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
-	<?= $this->Html->script('king-common.js') ?>
-	<?= $this->Html->script('deliswitch.js') ?>
-	<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
-	<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
-	<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
-	<?= $this->Html->script('king-components.js') ?>
-
-</head>
-
-<body class="sidebar-fixed topnav-fixed fullcalendar">
-	<div id="wrapper" class="wrapper">
+	<head>
+		<?= $this->Html->charset() ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			<?= $this->fetch('title') ?>
+		</title>
+		<?= $this->Html->meta('icon') ?>
 		
-		<?php include("top_bar.php"); ?>
-		<?php include("left_bar.php"); ?>
-		
-		<div id="main-content-wrapper" class="content-wrapper ">
-			<div class="content">
-			<?= $this->fetch('content') ?>
+		<?= $this->fetch('meta') ?>
+		<?= $this->fetch('css') ?>
+		<?= $this->fetch('script') ?>
+		<?= $this->fetch('assets') ?>
+		<!-- CSS -->
+		<?= $this->Html->css('style.css') ?>
+		<?= $this->Html->css('bootstrap.min.css') ?>
+		<?= $this->Html->css('font-awesome.min.css') ?>
+		<?= $this->Html->css('main.min.css') ?>
+		<!--[if lte IE 9]>
+			<?= $this->Html->css('main-ie.css') ?>
+			<?= $this->Html->css('main-ie-part2.css') ?>
+		<![endif]-->
+	</head>
+
+	<body class="sidebar-fixed topnav-fixed fullcalendar">
+		<div id="wrapper" class="wrapper">
+				<?php include("top_bar.php"); ?>
+				<?php include("left_bar.php"); ?>
+				
+				<div id="main-content-wrapper" class="content-wrapper">
+					<div class="content">
+						<?= $this->fetch('content') ?>
+					</div>
+					
+					<footer class="footer">
+						<p>&copy; 2016 The Develovers</p>
+					</footer>
+				</div>
 			</div>
-		</div>
-	</div>
-	
-    <footer>
-    </footer>
-    
-	<?= $this->Flash->render() ?>
-</body>
+		
+		<?= $this->Flash->render() ?>
+		
+		<?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
+		<?= $this->Html->script('bootstrap/bootstrap.js') ?>
+		<?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
+		<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
+		<?= $this->Html->script('king-common.js') ?>
+		<?= $this->Html->script('deliswitch.js') ?>
+		<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
+		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
+		<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
+		<?= $this->Html->script('king-components.js') ?>
+	</body>
 </html>
+
+
+
+
+
+
