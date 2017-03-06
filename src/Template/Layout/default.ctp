@@ -54,22 +54,27 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 						<p>&copy; 2016 The Develovers</p>
 					</footer>
 				</div>
+				
+				<footer class="footer">
+					<p>&copy; 2016 The Develovers</p>
+				</footer>
 			</div>
-		
-		<?= $this->Flash->render() ?>
-		
-		<?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
-		<?= $this->Html->script('bootstrap/bootstrap.js') ?>
-		<?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
-		<?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
-		<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
-		<?= $this->Html->script('king-common.js') ?>
-		<?= $this->Html->script('deliswitch.js') ?>
-		<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
-		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
-		<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
-		<?= $this->Html->script('king-components.js') ?>
+		</div>
 	</body>
+	
+	<?= $this->Flash->render() ?>
+	
+	<?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
+	<?= $this->Html->script('bootstrap/bootstrap.js') ?>
+	<?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
+	<?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
+	<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
+	<?= $this->Html->script('king-common.js') ?>
+	<?= $this->Html->script('deliswitch.js') ?>
+	<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
+	<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
+	<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
+	<?= $this->Html->script('king-components.js') ?>
 </html>
 
 
