@@ -6,3 +6,8 @@
  * and open the template in the editor.
  */
 
+App::uses('AppModel','Model');
+
+class MessengerModel extends AppModel{
+    
+}
