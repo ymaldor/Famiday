@@ -42,17 +42,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 	<body class="sidebar-fixed topnav-fixed fullcalendar">
 		<div id="wrapper" class="wrapper">
-				<?php include("top_bar.php"); ?>
-				<?php include("left_bar.php"); ?>
-				
-				<div id="main-content-wrapper" class="content-wrapper">
-					<div class="content">
-						<?= $this->fetch('content') ?>
-					</div>
-					
-					<footer class="footer">
-						<p>&copy; 2016 The Develovers</p>
-					</footer>
+			<?php include("top_bar.php"); ?>
+			<?php include("left_bar.php"); ?>
+			
+			<div id="main-content-wrapper" class="content-wrapper">
+				<div class="content">
+					<?= $this->fetch('content') ?>
 				</div>
 				
 				<footer class="footer">
