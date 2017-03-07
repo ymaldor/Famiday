@@ -9,5 +9,11 @@
 App::uses('AppModel','Model');
 
 class FamilyModel extends AppModel{
-    
+	
+	
+	fonction add_personne ($nom,$prenom,$adress,$phone,$datebirth,$Sexe,$Statut,$about)
+	{  }
 }
+
+
+
