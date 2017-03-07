@@ -12,9 +12,20 @@ use App\Controller\AppController;
 
 class MessengerController extends AppController{
     
+   
+    
     function newmessage()
     {
         
+        if ($this->request->is('post')){
+        if(isset($this->request->data)){
+            $this->loadModel('Messenger');
+            $this->Messenger->setMessage($this->request->data['message-from-select'], $this->request->data['Subject'],$this->request->data['Message']);
+        }
+        }
+    }
+    function inbox()
+    {
         
     }
 }
