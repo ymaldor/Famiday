@@ -18,9 +18,9 @@ class MessengerController extends AppController{
     {
         $this->loadModel('Messenger');
         //$notifinbox=$this->Messenger->getnotif();
-        if(!$notifinbox)
+        if(!isset($notifinbox))
         {
-            $notifinbox="";
+            $notifinbox=" ";
         }
         $this->set('notifinbox', $notifinbox);
         
@@ -35,8 +35,8 @@ class MessengerController extends AppController{
                         }
         }
     }
-    function inbox($param)
+    function inbox()
     {
-        debug($param);
+        $param=isset($this->request->query['param'])         ? $this->request->query['param']         : 1;
     }
 }
