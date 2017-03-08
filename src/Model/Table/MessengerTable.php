@@ -16,28 +16,17 @@ class MessengerTable extends Table{
      public function initialize(array $config)
     {
         $this->table('message');
+        $this->primaryKey('idmessage');
     }
     
-    function setMessage($to,$subject,$message)
+    public function setMessage($to,$subject,$message)
     {
         $table = TableRegistry::get('message');
         $now=Time::now();
         $query = $table->query();
-        $query->insert([
-            'from',
-            'to',
-            'message',
-            'datemessage',
-            'trashed',
-            'object',
-            ])
-            ->values([
-                "me",
-                $to,
-                $message,
-                $now,
-                0,
-                $subject
-            ]);
+        $query
+            ->insert(['from','to','message','datemessage','trashed','object'])
+            ->values(['from'=>1,'to'=>1,'message'=>$message,'datemessage'=>$now,'trashed'=>false,'object'=>$subject])
+            ->execute();
     }
 }

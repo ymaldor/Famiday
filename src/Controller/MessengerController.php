@@ -16,17 +16,27 @@ class MessengerController extends AppController{
     
     function newmessage()
     {
+        $this->loadModel('Messenger');
+        //$notifinbox=$this->Messenger->getnotif();
+        if(!$notifinbox)
+        {
+            $notifinbox="";
+        }
+        $this->set('notifinbox', $notifinbox);
+        
+        
         if ($this->request->is('post'))
 		{
 			if(isset($this->request->data))
 			{
-				$this->loadModel('Messenger');
-				$this->Messenger->setMessage($this->request->data['message-from-select'], $this->request->data['Subject'],$this->request->data['Message']);
-			}
+                            debug($this->request->data);
+				//$this->Messenger->setMessage($this->request->data['message-from-select'], $this->request->data['Subject'],$this->request->data['Message']);
+                                //$this->redirect(array('controller' => 'Messenger', 'action' => 'inbox'));
+                        }
         }
     }
-    function inbox()
+    function inbox($param)
     {
-        
+        debug($param);
     }
 }
