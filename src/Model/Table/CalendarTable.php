@@ -15,20 +15,24 @@ class CalendarTable extends Table{
     
     public function initialize(array $config)
     {
-        $this->table('personne');
+        $this->table('event');
     }
 	
-	public function add_personne($nom,$prenom,$about,$Sexe,$Statut,$adress,$phone,$datebirth)
-	{ 
-		$table = TableRegistry::get('personne'); //nom de la table
+	public function add_event($eventname,$eventstart,$eventend,$participant,$summary,$last_modif,$frequence,$until)
+	{
+		$table = TableRegistry::get('event'); //nom de la table
         
         $query = $table->query();
-        $query->insert(['nom', 'prenom', 'phone', 'adress'])
+        $query->insert(['eventname','eventstart','eventend','participant','summary','last_modif','frequence','until'])
               ->values([
-					'nom'=>$nom,
-					'prenom'=>$prenom,
-					'phone'=>$phone,
-					'adress'=>$adress])
+					'eventname'=>$eventname,
+					'eventstart'=>$eventstart,
+					'eventend'=>$eventend,
+					'participant'=>$participant,
+					'summary'=>$summary,
+					'last_modif'=>$last_modif,
+					'frequence'=>$frequence,
+					'until'=>$until])
 			  ->execute();
 	}
 }

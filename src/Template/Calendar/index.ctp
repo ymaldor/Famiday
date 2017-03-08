@@ -19,66 +19,70 @@
 										</a>
 									</h4>
 								</div>
+								
 								<div id="collapseOne" class="panel-collapse collapse">
 									<div class="panel-body">
 										<!--DEBUT FORM-->
-										<?= $this->Form->create('add_event', array('type'=>'post'))?>
-										<?= $this->Form->input('nom',array(	'type'=>'text',
+										<?= $this->Form->create('Formulaire', array('type'=>'post'))?>
+										<?= $this->Form->input('nom_event',array(	'type'=>'text',
 																			'label'=>False,
 																			'class'=>'form-control',
 																			'style'=>'margin-bottom:5px;',
 																			'placeholder'=>'titre du nouvel évènement')) ?>
 										
 										<div class="col-sm-6" style="padding:0 2px 0 0;">
-											<?= $this->Form->input('nom',array(	'type'=>'text',
+											<?= $this->Form->input('debut_jjmm',array(	'type'=>'text',
 																				'label'=>False,
 																				'class'=>'form-control',
 																				'style'=>'margin-bottom:5px;',
 																				'placeholder'=>'date début (jj/mm)')) ?>
-											<?= $this->Form->input('nom',array(	'type'=>'text',
+											<?= $this->Form->input('debut_hhmm',array(	'type'=>'text',
 																				'label'=>False,
 																				'class'=>'form-control',
 																				'style'=>'margin-bottom:5px;',
 																				'placeholder'=>'heure début (hh:mm)')) ?>
 										</div>
 										<div class="col-sm-6" style="padding:0 0 0 2px;">
-											<?= $this->Form->input('nom',array(	'type'=>'text',
-																				'label'=>False,
-																				'class'=>'form-control',
-																				'style'=>'margin-bottom:5px;',
-																				'placeholder'=>'date fin (jj/mm)')) ?>
-											<?= $this->Form->input('nom',array(	'type'=>'text',
-																				'label'=>False,
-																				'class'=>'form-control',
-																				'style'=>'margin-bottom:5px;',
-																				'placeholder'=>'heure fin (hh:mm)')) ?>
+											<?= $this->Form->input('fin_jjmm',array('type'=>'text',
+																					'label'=>False,
+																					'class'=>'form-control',
+																					'style'=>'margin-bottom:5px;',
+																					'placeholder'=>'date fin (jj/mm)')) ?>
+											<?= $this->Form->input('fin_hhmm',array('type'=>'text',
+																					'label'=>False,
+																					'class'=>'form-control',
+																					'style'=>'margin-bottom:5px;',
+																					'placeholder'=>'heure fin (hh:mm)')) ?>
 										</div>
 										
 										<?php $options= array( 'douille'=>'douille','machin'=>'machin', 'truc'=> 'truc', 'bidule' => 'bidule'); ?>
-										<?= $this->Form->input('To',array(	'type'=>'select',
-																			'multiple'=>'true',
-																			'label'=>False,
-																			'options'=>$options,
-																			'class'=>'select2',
-																			'id'=>'message-from-select',
-																			'style'=>'margin-bottom:5px;',
-																			'placeholder'=>'destinataire')) ?>
-										<?= $this->Form->input('To',array(	'type'=>'textarea',
-																			'label'=>False,
-																			'rows'=>'3',
-																			'cols'=>'30',
-																			'maxlength'=>'99',
-																			'class'=>'form-control',
-																			'style'=>'margin-bottom:5px;',
-																			'placeholder'=>'description (facultative)')) ?>
-										<?= $this->Form->input('<i class="fa fa-plus-square"></i> Create',array(
-																			'type'=>'button',
+										<?= $this->Form->input('participant',array(	'type'=>'select',
+																					'multiple'=>'true',
+																					'label'=>False,
+																					'options'=>$options,
+																					'class'=>'select2',
+																					'id'=>'message-from-select',
+																					'style'=>'margin-bottom:5px;',
+																					'placeholder'=>'participant')) ?>
+										<?= $this->Form->input('description',array(	'type'=>'textarea',
+																					'label'=>False,
+																					'rows'=>'3',
+																					'cols'=>'30',
+																					'maxlength'=>'99',
+																					'class'=>'form-control',
+																					'style'=>'margin-bottom:5px;',
+																					'placeholder'=>'description (facultative)')) ?>
+										<!--<i class="fa fa-plus-square"></i> Create-->
+										<?= $this->Form->submit('Create',array(
+																			'type'=>'submit',
 																			'label'=>False,
 																			'class'=>'btn btn-custom-primary btn-block',
 																			'id'=>'message-from-select',
 																			'style'=>'margin-bottom:5px;',
 																			'placeholder'=>'destinataire',
 																			'escape'=>False)) ?>
+										<?= $this->Form->end ?>
+										<!--FIN FORM-->
 									</div>
 								</div>
 							</div>
