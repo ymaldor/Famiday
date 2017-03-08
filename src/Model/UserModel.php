@@ -10,16 +10,16 @@ App::uses('AppModel','Model');
 App::uses('Security', 'Utility');
 
 class UserModel extends AppModel{
-    //public $displayField = 'name';
+    public $displayField = 'name';
     
     public function createUser ($mail,$pass){
         if (isset($mail) AND isset($pass) AND !empty($mail) AND !empty($pass)){
             if($this->find('first', array('conditions' => array('user.mail' => $mail))) != true){
                 $pwHash = Security::hash($pass);
-                $data = array('email' => $mail, 'password' => $pwHash);
+                $data = array('mail' => $mail, 'password' => $pwHash);
                 $this->save($data);
                 $this->set('message','Bienvenue à Famiday ');
-                //$this->set('create', 'ok');
+                $this->set('create', 'ok');
             }
             else {
                 

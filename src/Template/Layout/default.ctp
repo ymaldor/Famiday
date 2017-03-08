@@ -52,14 +52,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?= $this->Html->script('king-components.js') ?>
 	</head>
 
-	<body class="sidebar-fixed topnav-fixed fullcalendar">
-		<div id="wrapper" class="wrapper">
-			<?php include("top_bar.php"); ?>
-			<?php include("left_bar.php"); ?>
+	<?php if(!isset($inscription)) { echo ' 
+		<body class="sidebar-fixed topnav-fixed fullcalendar">
+		<div id="wrapper" class="wrapper">';
+
+			include("top_bar.php"); 
+			include("left_bar.php");
 			
-			<div id="main-content-wrapper" class="content-wrapper">
-				<div class="content">
-					<?= $this->fetch('content') ?>
+			echo'<div id="main-content-wrapper" class="content-wrapper">
+				<div class="content"> '; } ?>
+					<?= $this->fetch("content") ?>
+	<?php if(!isset($inscription)) { echo ' 
 				</div>
 				
 				<footer class="footer">
@@ -67,14 +70,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 				</footer>
 			</div>
 		</div>
-	</body>
+	</body> '; } ?>
 	
 	<?= $this->Flash->render() ?>
 	
 </html>
-
-
-
-
-
-
