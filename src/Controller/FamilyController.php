@@ -13,8 +13,7 @@ class FamilyController extends AppController{
     
     function gestion()
     {
-        $form->button('button_text', array('onclick' => "location.href='".$this->Html->url(family/gestion)."'"));
-    } 
+	}
 
 	function Formulaire()
     {
