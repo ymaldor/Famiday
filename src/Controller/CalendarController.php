@@ -15,4 +15,26 @@ class CalendarController extends AppController{
     {
 	
     }
+	
+	function Formulaire()
+    {
+       if($this->request->is('post'))
+	   {
+			if(isset($this->request->data))
+			{
+			$this->loadModel('Family');
+			$this->Family->add_personne(	
+				$this->request->data['nom'],
+				$this->request->data['prenom'],
+				$this->request->data['about'],
+				$this->request->data['Sexe'],
+				$this->request->data['Statut'],
+				$this->request->data['adress'],
+				$this->request->data['phone'],
+				$this->request->data['datebirth']);
+			
+			}
+	   }
+	   debug($this->request->data);
+    }
 }
