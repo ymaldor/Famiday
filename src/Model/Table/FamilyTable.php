@@ -40,18 +40,19 @@ class FamilyTable extends Table{
 	
 	public function remove_personne($familyid, $idpersonne)
 	{ 
-		$table = TableRegistry::get('personne'); //nom de la table
-        
-        $query = $table->query();
-        $query->insert(['idfamille', 'idpersonne', 'nom', 'prenom'])
-              ->values([
-					'idfamille'=>$familyid,
-					'idpersonne'=>$idpersonne,
-					'nom'=>$nom,
-					'prenom'=>$prenom
-					])
-			  ->execute();
-		
-		
+		$bdd = ConnectionManager::get('default');
+		$tmp = $bdd->execute("DELETE FROM member_of_family WHERE idpersonne=$idpersonne AND familyid=$familyid");
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

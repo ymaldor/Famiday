@@ -50,9 +50,7 @@
 					
 					
 				<?= $this->Form->submit('Ajouter');?>	
-				<div class="col-sm-2">
-					<?= $this->Html->link('<i class="fa fa-plus-square"></i>Ajouter une personne', array('action'=>'gestion'), array('class' => 'btn btn-custom-primary btn-block', 'id' => 'btn-quick-event', 'escape'=>false)) ?>
-				</div>	
+					
 				<?= $this->Form->end ?>		
 					
 					
@@ -75,9 +73,7 @@
 									<?= $this->Form->create ('Famille', array('type' => 'remove', 'url' => 'family/removal',))?>
 																	
 									<?= $this->Form->submit('Retirer');?>	
-						<div class="col-sm-2">
-									<?= $this->Html->link('<i class="fa fa-plus-square"></i>Retirer une personne', array('action'=>'gestion'), array('class' => 'btn btn-custom-primary btn-block', 'id' => 'remove', 'escape'=>false)) ?>
-						</div>	
+						
 									<?= $this->Form->end ?>		
 						
 						
