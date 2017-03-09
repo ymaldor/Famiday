@@ -21,19 +21,39 @@ class MessengerTable extends Table{
     
     public function setMessage($to,$subject,$message,$myid)
     {
+        $me="douille";
+        $me=mysql_escape_string($me);
+        $message=mysql_escape_string($message);
+        $subject=mysql_escape_string($subject);
+        $myid=mysql_escape_string($myid);
         $id=md5(uniqid(rand(), true));
-        $now=Time::now();
+        $table = TableRegistry::get('message');
+        $query=$table->query();
+        $query->insert([
+            'idmessage',
+            'object',
+            'message',
+            ])
+        ->values([
+            'idmessage'=>$id,
+            'object'=>$subject,
+            'message'=>$message,
+            ])
+        ->execute();
         
-        $connection = ConnectionManager::get('default');
-        $connection->execute('INSERT INTO'
-                . 'message'
-                . 'VALUES('.$now.','.$id.',0,'.$message.','.$subject.',0)');
+        debug($id);
+        
+        $table = TableRegistry::get('message_sent');
         for($i=0;$i<sizeof($to);$i++)
         {
-            $connection->execute('INSERT INTO'
-                . 'message_sent'
-                . 'VALUES('.$myid.','.$to[$i].','.$id.')');
-            
+            $to[$i]=mysql_escape_string($to[$i]);
+            $connection = ConnectionManager::get('default');
+            $string=$connection->execute('INSERT INTO `message_sent` (`from`, `to`, `message`) '
+                    . 'SELECT user.userid AS fromuser, user.userid AS touser, message.idmessage '
+                    . 'FROM user, message '
+                    . 'WHERE user.userid= "'.$me.'" '
+                    . 'AND user.userid = "'.$to[$i].'" '
+                    . 'AND message.idmessage="'.$id.'"');            
         }
         
     }

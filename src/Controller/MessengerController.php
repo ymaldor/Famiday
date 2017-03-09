@@ -25,9 +25,10 @@ class MessengerController extends AppController{
             
         if ($this->request->is('post'))
 		{
+            debug($this->request->data);
 			if((isset($this->request->data)) && !empty($this->request->data['Message']))
 			{
-                            $this->Messenger->setMessage($this->request->data['message-from-select'], $this->request->data['Subject'],$this->request->data['Message'],$this->Session->check['Userid']);
+                            $this->Messenger->setMessage($this->request->data['To'], $this->request->data['Subject'],$this->request->data['Message'],$this->Session->check['Userid']);
                             //$this->redirect(array('controller' => 'Messenger', 'action' => 'inbox'));
                         }
         }
