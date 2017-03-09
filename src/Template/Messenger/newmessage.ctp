@@ -27,7 +27,7 @@
                         </div>
                         
                         <div class="form-group" class="col-sm-10 col-sm-offset-2">
-                                                    <?= $this->Form->submit('Send Message', array('type' => 'submit', 'class' => 'btn btn-primary'))?>
+                                                    <?= $this->Form->submit('Send Message', array( 'class' => 'btn btn-primary'))?>
                         </div>
                                             <?= $this->Form->end()?>
                         
