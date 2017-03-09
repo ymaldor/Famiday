@@ -81,7 +81,7 @@
 																			'style'=>'margin-bottom:5px;',
 																			'placeholder'=>'destinataire',
 																			'escape'=>False)) ?>
-										<?= $this->Form->end ?>
+										<?= $this->Form->end() ?>
 										<!--FIN FORM-->
 									</div>
 								</div>
