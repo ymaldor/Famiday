@@ -114,11 +114,124 @@
 			
 			<!-- LIEN DE MODIF DU CALENDRIER -->
 			<div class="calendar"></div>
-			<!-- assets/js/king-components.fs **ligne 500** -->
-			<!-- Javascript -->
-<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
-<?= $this->Html->script('plugins/select2/select2.min.js') ?>
-<?= $this->Html->script('king-page.js') ?>
+			<!-- king-components.js **ligne 500** -->
+			
+		<!-- Javascript -->
+		<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
+		<?= $this->Html->script('plugins/select2/select2.min.js') ?>
+		<?= $this->Html->script('king-page.js') ?>
+		
+		<script type="text/javascript">
+			//*******************************************
+			/*	CALENDAR PAGE
+			/********************************************/
+
+			if( $('body').hasClass('fullcalendar') ) {
+
+				// init the external events
+				$('#external-events div.external-event').each(function() {
+				
+					// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+					// it doesn't need to have a start or end
+					var eventObject = {
+						title: $.trim($(this).text()) // use the element's text as the event title
+					};
+					
+					// store the Event Object in the DOM element so we can get to it later
+					$(this).data('eventObject', eventObject);
+					
+					// make the event draggable using jQuery UI
+					$(this).draggable({
+						zIndex: 999,
+						revert: true,      // will cause the event to go back to its
+						revertDuration: 0  //  original position after the drag
+					});
+					
+				});
+
+				// init the calendar
+				var date = new Date();
+				var d = date.getDate();
+				var m = date.getMonth();
+				var y = date.getFullYear();
+				
+				$('.calendar').fullCalendar({
+					header: {
+						left: 'month, agendaWeek, agendaDay',
+						center: 'title',
+						right: 'prev, next, today'
+					},
+					editable: true,
+					droppable: true,
+					drop: function(date, allDay) {
+						// retrieve the dropped element's stored Event Object
+						var originalEventObject = $(this).data('eventObject');
+						
+						// we need to copy it, so that multiple events don't have a reference to the same object
+						var copiedEventObject = $.extend({}, originalEventObject);
+						
+						// assign it the date that was reported
+						copiedEventObject.start = date;
+						copiedEventObject.allDay = allDay;
+						
+						// render the event on the calendar
+						// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+						$('.calendar').fullCalendar('renderEvent', copiedEventObject, true);
+						
+						// is the "remove after drop" checkbox checked?
+						if ($('#drop-remove').is(':checked')) {
+							// if so, remove the element from the "Draggable Events" list
+							$(this).remove();
+						}
+					},
+					
+					defaultView: 'agendaWeek',
+					
+					<?php
+						if(isset($event) and $event!=[])
+						{
+							echo "events: [";
+							for($i=0;$i<count($event);$i++)
+							{
+								echo"{title: '".$event[$i][1]."',start: '".$event[$i][2]."'";
+								
+								if($event[$i][3]!="") { echo",end: '".$event[$i][3]."'"; }
+								
+								echo ",allDay: false";
+								echo "}";
+								if($i<count($event)-1) { echo","; }
+							}
+							echo "],";
+						}
+					?>
+				
+				});
+				
+				$colorPicker = $('select[name="colorpicker-picker-longlist"]');
+				$colorPicker.simplecolorpicker({
+					picker: false, 
+					theme: 'fontawesome'
+				});
+
+				$('#btn-quick-event').click( function() {
+					
+					var originalEventObject = $(this).data('eventObject');
+					var copiedEventObject = $.extend({}, originalEventObject);
+					var eventTitle = 'Untitled Event';
+
+					if( $('#quick-event-name').val() != '' ) {
+						eventTitle = $('#quick-event-name').val();
+					}
+					
+					copiedEventObject.title = eventTitle;
+					copiedEventObject.start = date; // today
+					copiedEventObject.color = $colorPicker.val();
+						
+					$('.calendar').fullCalendar('renderEvent', copiedEventObject, true);
+				});
+
+			} // end calendar page demo
+		</script>
 		</div>
 	</div>
 	<!-- END WIDGET CALENDAR -->

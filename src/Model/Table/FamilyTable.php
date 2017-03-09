@@ -1,5 +1,5 @@
 <?php
-
+/* family user devient id personne dans bdd*/
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -36,5 +36,22 @@ class FamilyTable extends Table{
 					'nom'=>$nom
 					, $to, $message, $now, 0, $subject])
 			  ->execute();*/
+	}
+	
+	public function remove_personne($familyid, $idpersonne)
+	{ 
+		$table = TableRegistry::get('personne'); //nom de la table
+        
+        $query = $table->query();
+        $query->insert(['idfamille', 'idpersonne', 'nom', 'prenom'])
+              ->values([
+					'idfamille'=>$familyid,
+					'idpersonne'=>$idpersonne,
+					'nom'=>$nom,
+					'prenom'=>$prenom
+					])
+			  ->execute();
+		
+		
 	}
 }
