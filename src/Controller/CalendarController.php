@@ -50,6 +50,17 @@ class CalendarController extends AppController{
 				//$this->Calendar->add_event();
 			}
 		}
-		//debug($this->request->data);
+		
+		//Event
+		$idpersonne = 0;
+		$this->set('event', $this->Calendar->recup_event($idpersonne));
+		
+		//debug($this->Calendar->recup_event($idpersonne));
     }
 }
+
+
+
+
+
+

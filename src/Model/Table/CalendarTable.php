@@ -35,7 +35,37 @@ class CalendarTable extends Table{
 					'until'=>$until])
 			  ->execute();
 	}
+	
+	public function recup_event($idpersonne)
+	{
+		$bdd = ConnectionManager::get('default');
+		$tmp = $bdd->execute('SELECT * FROM event')->fetchAll();
+		
+		$result=[];
+		for($i=0;$i<count($tmp);$i++)
+		{
+			$str=explode(",", $tmp[$i][4]);
+			for($j=0;$j<count($str);$j++)
+			{
+				if($str[$j]==$idpersonne)
+				{
+					$result[count($result)]=$tmp[$i];
+					break;
+				}
+			}
+		}
+		
+		return $result;
+	}
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -31,7 +31,6 @@ class FamilyController extends AppController{
 				$this->request->data['adress'],
 				$this->request->data['phone'],
 				$this->request->data['datebirth']);
-			
 			}
 	   }
 	   debug($this->request->data);
