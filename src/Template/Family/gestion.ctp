@@ -23,38 +23,67 @@
 					
 					
 				<?= $this->Form->create ('Famille', array('type' => 'post'))?>
-				<?= $this->Form->input ('nom') ?>
-				<?= $this->Form->input ('prenom')?>
-				<?= $this->Form->input ('adress')?>
-				<?= $this->Form->input ('phone')?>
+									<?= $this->Form->input ('nom') ?>
+									<?= $this->Form->input ('prenom')?>
+									<?= $this->Form->input ('adress')?>
+									<?= $this->Form->input ('phone')?>
 
 
-				<?= $this->Form->input ('datebirth');?>
+									<?= $this->Form->input ('datebirth');?>
 
-				<?= $this->Form->textarea('about')?>
-				<?= $this->Form->select(
-					'Sexe',
-					[0 => 'Homme',1=>  'Femme'],
-					['empty' => '(choisissez)'])?>
+									<?= $this->Form->textarea('about')?>
+									<?= $this->Form->select(
+										'Sexe',
+										[0 => 'Homme',1=>  'Femme'],
+										['empty' => '(choisissez)'])?>
+										
+									<?= $this->Form->select(
+										'Statut',
+										[ 'Garcon/Fille','Pere/Mere', 'Oncle/tente', 'Grand-pere/Grand-mere', 'Grand-oncle/Grand-tente', 'Cousin/Cousine', 'Tuteur/Tutrice'],
+										['empty' => '(choisissez)'] )?>
+										<?= $this->Form->select(
+										'Responsable',
+										[0 => 'Oui',1=>  'Non'],
+										['empty' => '(choisissez)'])?>
+										
+									
 					
-				<?= $this->Form->select(
-					'Statut',
-					['Pere/Mere', 'Oncle/tente', 'Grand-pere/Grand-mere', 'Grand-oncle/Grand-tente', 'Frere/Soeur', 'Cousin/Cousine', 'Tuteur/Tutrice'],
-					['empty' => '(choisissez)'] )?>
 					
-				<?= $this->Form->submit('Ajouter');?>
-				<?= $this->Form->end ?>					
-					
-					
+				<?= $this->Form->submit('Ajouter');?>	
 				<div class="col-sm-2">
 					<?= $this->Html->link('<i class="fa fa-plus-square"></i>Ajouter une personne', array('action'=>'gestion'), array('class' => 'btn btn-custom-primary btn-block', 'id' => 'btn-quick-event', 'escape'=>false)) ?>
 				</div>	
-					
+				<?= $this->Form->end ?>		
 					
 					
 				</div>
 			</div>
 		</div>
+			<div class="panel panel-default">
+				<div class="btn-danger btn-block">
+					<h4 class="panel-title text-center">
+						<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="color:white; text-decoration:none;">
+							<i class="fa fa-plus-circle" style="position:relative; top:-1px;"></i><i class="fa fa-plus-circle"></i> RETIRER UN MEMBRE DE LA FAMILLE
+						</a>
+					</h4>
+				</div>
+				
+				<div id="collapseTwo" class="panel-collapse collapse">			
+				
+					<div class="panel-body">
+																									
+									<?= $this->Form->create ('Famille', array('type' => 'remove', 'url' => 'family/removal',))?>
+																	
+									<?= $this->Form->submit('Retirer');?>	
+						<div class="col-sm-2">
+									<?= $this->Html->link('<i class="fa fa-plus-square"></i>Retirer une personne', array('action'=>'gestion'), array('class' => 'btn btn-custom-primary btn-block', 'id' => 'remove', 'escape'=>false)) ?>
+						</div>	
+									<?= $this->Form->end ?>		
+						
+						
+					</div>
+				</div>
+			</div>
 		</div>
 
 		

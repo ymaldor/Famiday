@@ -31,8 +31,12 @@
 										
 									<?= $this->Form->select(
 										'Statut',
-										['Pere/Mere', 'Oncle/tente', 'Grand-pere/Grand-mere', 'Grand-oncle/Grand-tente', 'Frere/Soeur', 'Cousin/Cousine', 'Tuteur/Tutrice'],
+										[ 'Garcon/Fille','Pere/Mere', 'Oncle/tente', 'Grand-pere/Grand-mere', 'Grand-oncle/Grand-tente', 'Cousin/Cousine', 'Tuteur/Tutrice'],
 										['empty' => '(choisissez)'] )?>
+										<?= $this->Form->select(
+										'Responsable',
+										[0 => 'Oui',1=>  'Non'],
+										['empty' => '(choisissez)'])?>
 										
 									<?= $this->Form->submit('Ajouter');?>
 									<?= $this->Form->end ?>					
