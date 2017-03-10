@@ -66,14 +66,14 @@
 																					'placeholder'=>'participant')) ?>
 										<?= $this->Form->input('description',array(	'type'=>'textarea',
 																					'label'=>False,
-																					'rows'=>'3',
+																					'rows'=>'1',
 																					'cols'=>'30',
-																					'maxlength'=>'99',
+																					'maxlength'=>'50',
 																					'class'=>'form-control',
-																					'style'=>'margin-bottom:5px;',
+																					'style'=>'margin-bottom:15px;',
 																					'placeholder'=>'description (facultative)')) ?>
 										<!--<i class="fa fa-plus-square"></i> Create-->
-										<?= $this->Form->submit('Create',array(
+										<?= $this->Form->submit('Créer l\'event',array(
 																			'type'=>'submit',
 																			'label'=>False,
 																			'class'=>'btn btn-custom-primary btn-block',
@@ -95,14 +95,51 @@
 								<div class="panel-heading btn-danger btn-block" style="background-color: #DB3833;">
 									<h4 class="panel-title text-center">
 										<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="color:white; text-decoration:none;">
-											<i class="fa fa-minus-circle" style="position:relative; top:-1px;"></i><i class="fa fa-plus-circle"></i> RETIRER UN EVENT
+											<i class="fa fa-minus-circle" style="position:relative; top:-1px;"></i><i class="fa fa-minus-circle"></i> RETIRER UN EVENT
 										</a>
 									</h4>
 								</div>
 								<div id="collapseTwo" class="panel-collapse collapse">
 									<div class="panel-body">
-										<input type="text" class="form-control" id="quick-event-name" placeholder="new event title">
-										<button type="button" id="btn-quick-event" class="btn btn-custom-primary btn-block"><i class="fa fa-plus-square"></i> Create</button>
+										<select name="select2" id="select1" class="select2 FORM" style="margin-bottom:15px">
+										<?php
+											if(isset($event))
+											{
+												for($i=0;$i<count($event);$i++)
+												{
+													if($i==0) {$selec="selected";} else {$selec="";}
+													echo "<option value=".$event[$i][0]." $selec>".$event[$i][1]." - ".$event[$i][2]." :: ".$event[$i][5]."</option>";
+												}
+											}
+										?>
+										</select>
+										
+										<!--DEBUT INVISIBLE FORM-->
+										<?= $this->Form->create('Formulaire', array('type'=>'post', 'id'=>'hiddenform', 'url' => ['controller' => 'Calendar', 'action' => 'suppr']))?>
+										<?= $this->Form->input('TheChosenOne',array(	'type'=>'text',
+																			'id'=>'hiddeninput',
+																			'label'=>False,
+																			'style'=>'display:none;')) ?>
+										<?= $this->Form->submit('Supprimer l\'event',array(
+																			'type'=>'submit',
+																			'label'=>False,
+																			'class'=>'btn btn-custom-primary btn-block',
+																			'id'=>'message-from-select',
+																			'style'=>'margin-bottom:5px;',
+																			'placeholder'=>'destinataire',
+																			'escape'=>False)) ?>
+										<?= $this->Form->end() ?>
+										<!--FIN INVISIBLE FORM-->
+										
+										<script type="text/javascript">
+											$('.FORM').on('change', function (e) {
+												hiddenform = document.getElementById('hiddenform');
+												hiddeninput = document.getElementById('hiddeninput');
+												index = document.getElementById('select1').value;
+												
+												hiddeninput.value = index;
+											});
+										</script>
 									</div>
 								</div>
 							</div>

@@ -57,6 +57,12 @@ class CalendarTable extends Table{
 		
 		return $result;
 	}
+	
+	public function suppr_event($eventid)
+	{
+		$bdd = ConnectionManager::get('default');
+		$tmp = $bdd->execute("DELETE FROM event WHERE eventid=$eventid");
+	}
 }
 
 

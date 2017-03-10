@@ -37,7 +37,7 @@ class CalendarController extends AppController{
 				$participant="";
 				for($i=0;$i<count($tmp);$i++) { $participant+=$tmp[$i]; }
 				//Summary
-				$summary=$this->request->data['description'];
+				$summary="";
 				//Last modif
 				$last_modif = date("y-m-d");
 				//Fréquence
@@ -56,6 +56,22 @@ class CalendarController extends AppController{
 		$this->set('event', $this->Calendar->recup_event($idpersonne));
 		
 		//debug($this->Calendar->recup_event($idpersonne));
+    }
+	
+	function suppr()
+    {
+		//Formulaire
+		if($this->request->is('post'))
+		{
+			if(isset($this->request->data))
+			{
+				$this->loadModel('calendar');
+				$this->Calendar->suppr_event($this->request->data['TheChosenOne']);
+				
+				$this->redirect(array('controller' => 'Calendar', 'action' => 'index'));
+				//$this->Calendar->add_event();
+			}
+		}
     }
 }
 
