@@ -17,7 +17,7 @@
     <div class="top">
         <div class="row">
             <div class="col-lg-2">
-                <button class="btn btn-primary btn-block btn-compose"><i class="fa fa-pencil"></i> COMPOSE</button>
+                <?= $this->Html->link('<i class="fa fa-pencil"></i> COMPOSE', array('controller' => 'Messenger','action'=> 'newmessage'),array('class' => 'btn btn-primary btn-block btn-compose', 'escape' => false )) ?>
             </div>
             <div class="col-lg-10">
                 <div class="top-menu">

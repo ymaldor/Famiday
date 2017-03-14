@@ -52,7 +52,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?= $this->Html->script('king-components.js') ?>
 	</head>
 
-	<?php if(!isset($inscription)) { echo ' 
+	<?php if(!isset($inscription)) { echo '
 		<body class="sidebar-fixed topnav-fixed fullcalendar">
 		<div id="wrapper" class="wrapper">';
 

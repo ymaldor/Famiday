@@ -13,8 +13,7 @@ class FamilyController extends AppController{
     
     function gestion()
     {
-        $form->button('button_text', array('onclick' => "location.href='".$this->Html->url(family/gestion)."'"));
-    } 
+	}
 
 	function Formulaire()
     {
@@ -29,13 +28,29 @@ class FamilyController extends AppController{
 				$this->request->data['about'],
 				$this->request->data['Sexe'],
 				$this->request->data['Statut'],
+				$this->request->data['Responsable'],
 				$this->request->data['adress'],
 				$this->request->data['phone'],
 				$this->request->data['datebirth']);
-			
 			}
 	   }
 	   debug($this->request->data);
+    }
+	
+	function removal()
+    {
+       if($this->request->is('post'))
+	   {
+			if(isset($this->request->data))
+			{
+			$this->loadModel('Family');
+			$this->Family->remove_personne();
+			
+			}
+	   }
+	   //debug($this->request->data);
+	   
+	   $this->redirect(array(array('controller' => 'Family', 'action' => 'gestion')));
     }
 }
 
