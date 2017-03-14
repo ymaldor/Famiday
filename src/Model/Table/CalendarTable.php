@@ -61,7 +61,21 @@ class CalendarTable extends Table{
 	public function suppr_event($eventid)
 	{
 		$bdd = ConnectionManager::get('default');
-		$tmp = $bdd->execute("DELETE FROM event WHERE eventid=$eventid");
+		$tmp = $bdd->execute("DELETE FROM event WHERE id=$eventid");
+	}
+	
+	public function recup_family($id)
+	{
+		$bdd = ConnectionManager::get('default');
+		$idfamille=$bdd->execute('
+			SELECT family.id FROM user
+            INNER JOIN personne AS p ON user.id= p.userid
+            INNER JOIN family ON p.idfamily = family.id
+            WHERE user.id="'.$id.'"')->fetch()[0];
+		
+		$famille=$bdd->execute('SELECT id,nom,prenom FROM personne WHERE idfamily="'.$idfamille.'"')->fetchAll();
+		
+		return $famille;
 	}
 }
 

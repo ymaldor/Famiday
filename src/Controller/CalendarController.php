@@ -13,6 +13,15 @@ class CalendarController extends AppController{
 	
 	function index()
     {
+		//Session
+		//$id = $session->read('id');
+		$id = 1;
+		
+		//Event
+		//$this->Calendar->recup_family($id);
+		debug($this->Calendar->recup_family($id));
+		
+		
 		//Formulaire
 		if($this->request->is('post'))
 		{
@@ -53,7 +62,7 @@ class CalendarController extends AppController{
 		
 		//Event
 		$idpersonne = 0;
-		$this->set('event', $this->Calendar->recup_event($idpersonne));
+		$this->set('event', $this->Calendar->recup_family($idpersonne));
 		
 		//debug($this->Calendar->recup_event($idpersonne));
     }

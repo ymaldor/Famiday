@@ -66,4 +66,10 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+	
+	public function beforeFilter(Event $event)
+    {
+        $this->loadModel('calendar');
+		$this->set('family', $this->Calendar->recup_family($id);
+    }
 }
