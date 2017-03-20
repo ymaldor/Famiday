@@ -67,9 +67,17 @@ class AppController extends Controller
         }
     }
 	
-	/*public function beforeFilter(Event $event)
+	public function beforeFilter(Event $event)
     {
+		//Session
+		//$id = $session->read('id');
+		$id = 1;
+		
         $this->loadModel('calendar');
-		$this->set('family', $this->Calendar->recup_family($id);
-    }*/
+		$this->set('family', $this->Calendar->recup_family($id));
+    }
 }
+
+
+
+

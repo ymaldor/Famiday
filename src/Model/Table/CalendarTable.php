@@ -76,6 +76,10 @@ class CalendarTable extends Table{
 		$famille=$bdd->execute('SELECT id,nom,prenom FROM personne WHERE idfamily="'.$idfamille.'"')->fetchAll();
 		
 		return $famille;
+		
+		//$table=  TableRegistry::get('family');
+		//$a=$table->find()->where(['id' => $id])->count();
+		//if(!$a) return false;
 	}
 }
 

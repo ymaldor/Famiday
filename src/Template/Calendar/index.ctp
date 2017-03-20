@@ -102,7 +102,7 @@
 								<div id="collapseTwo" class="panel-collapse collapse">
 									<div class="panel-body">
 										<select name="select2" id="select1" class="select2 FORM" style="margin-bottom:15px">
-										<?php
+										<?php 
 											if(isset($event))
 											{
 												for($i=0;$i<count($event);$i++)

@@ -30,7 +30,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->fetch('script') ?>
 		<?= $this->fetch('assets') ?>
 		<!-- CSS -->
-		<?= $this->Html->css('style.css') ?>
 		<?= $this->Html->css('bootstrap.min.css') ?>
 		<?= $this->Html->css('font-awesome.min.css') ?>
 		<?= $this->Html->css('main.min.css') ?>
@@ -38,18 +37,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 			<?= $this->Html->css('main-ie.css') ?>
 			<?= $this->Html->css('main-ie-part2.css') ?>
 		<![endif]-->
-                <!-- JS -->
-                <?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
-                <?= $this->Html->script('bootstrap/bootstrap.js') ?>
-                <?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
-                <?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
-                <?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
-                <?= $this->Html->script('king-common.js') ?>
-                <?= $this->Html->script('deliswitch.js') ?>
-                <?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
-                <?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
-                <?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
-                <?= $this->Html->script('king-components.js') ?>
+		<!-- JS -->
+		<?= $this->Html->script('jquery/jquery-2.1.0.min.js') ?>
+		<?= $this->Html->script('bootstrap/bootstrap.js') ?>
+		<?= $this->Html->script('plugins/modernizr/modernizr.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-tour/bootstrap-tour.custom.js') ?>
+		<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
+		<?= $this->Html->script('king-common.js') ?>
+		<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
+		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
+		<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
+		<?= $this->Html->script('king-components.js') ?>
 	</head>
 
 	<?php if(!isset($inscription)) { echo '

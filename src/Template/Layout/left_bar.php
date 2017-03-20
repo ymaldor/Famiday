@@ -7,13 +7,15 @@
 				<li><a href="#" class="js-sub-menu-toggle"><i class="fa fa-navicon"></i><span class="text">Calendrier</span>
 					<i class="toggle-icon fa fa-angle-left"></i></a>
 					<ul class="sub-menu ">
-						<li><?= $this->Html->link('<span class="text">Bill Jhones</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-						<li><?= $this->Html->link('<span class="text">Roger le nouveau né</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-						<li><?= $this->Html->link('<span class="text">Luis Sanchez</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-						<li><?= $this->Html->link('<span class="text">Wang Fu</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-						<li><?= $this->Html->link('<span class="text">Herman Gunter</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-						<li><?= $this->Html->link('<span class="text">Valesca Popozuda</span>', array('controller' => 'Calendar','action'=> 'index'), array('escape' => false)); ?></li>
-					</ul>
+						<?php
+						for($i=0;$i<count($family);$i++)
+						{
+							echo "<li>";
+							echo $this->Html->link('<span class="text">'.$family[$i][1].' '.$family[$i][2].'</span>', array('controller' => 'Calendar','action'=> 'index/'.$family[$i][0]), array('escape' => false));
+							echo "</li>";
+						}
+						?>
+					</ul> 
 				</li>
 				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Gestion famille</span>', array('controller' => 'Family','action'=> 'gestion'), array('escape' => false)); ?></li>
 				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Message</span>', array('controller' => 'Messenger','action'=> 'inbox'), array('escape' => false)); ?></li>
