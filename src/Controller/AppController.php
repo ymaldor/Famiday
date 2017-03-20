@@ -67,9 +67,9 @@ class AppController extends Controller
         }
     }
 	
-	public function beforeFilter(Event $event)
+	/*public function beforeFilter(Event $event)
     {
         $this->loadModel('calendar');
 		$this->set('family', $this->Calendar->recup_family($id);
-    }
+    }*/
 }
