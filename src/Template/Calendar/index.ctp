@@ -55,7 +55,7 @@
 																					'placeholder'=>'heure fin (hh:mm)')) ?>
 										</div>
 										
-										<?php $options= array( 'douille'=>'douille','machin'=>'machin', 'truc'=> 'truc', 'bidule' => 'bidule'); ?>
+										<?php $options= array( '1'=>'douille','2'=>'machin', '3'=> 'truc', '4' => 'bidule'); ?>
 										<?= $this->Form->input('participant',array(	'type'=>'select',
 																					'multiple'=>'true',
 																					'label'=>False,
@@ -116,10 +116,10 @@
 										
 										<!--DEBUT INVISIBLE FORM-->
 										<?= $this->Form->create('Formulaire', array('type'=>'post', 'id'=>'hiddenform', 'url' => ['controller' => 'Calendar', 'action' => 'suppr']))?>
-										<?= $this->Form->input('TheChosenOne',array(	'type'=>'text',
-																			'id'=>'hiddeninput',
-																			'label'=>False,
-																			'style'=>'display:none;')) ?>
+										<?= $this->Form->input('TheChosenOne',array('type'=>'text',
+																					'id'=>'hiddeninput',
+																					'label'=>False,
+																					'style'=>'display:none;')) ?>
 										<?= $this->Form->submit('Supprimer l\'event',array(
 																			'type'=>'submit',
 																			'label'=>False,
@@ -152,11 +152,7 @@
 			<!-- LIEN DE MODIF DU CALENDRIER -->
 			<div class="calendar"></div>
 			<!-- king-components.js **ligne 500** -->
-			
-		<!-- Javascript -->
-		<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
-		<?= $this->Html->script('plugins/select2/select2.min.js') ?>
-		<?= $this->Html->script('king-page.js') ?>
+
 		
 		<script type="text/javascript">
 			//*******************************************
@@ -198,29 +194,8 @@
 						center: 'title',
 						right: 'prev, next, today'
 					},
-					editable: true,
-					droppable: true,
-					drop: function(date, allDay) {
-						// retrieve the dropped element's stored Event Object
-						var originalEventObject = $(this).data('eventObject');
-						
-						// we need to copy it, so that multiple events don't have a reference to the same object
-						var copiedEventObject = $.extend({}, originalEventObject);
-						
-						// assign it the date that was reported
-						copiedEventObject.start = date;
-						copiedEventObject.allDay = allDay;
-						
-						// render the event on the calendar
-						// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-						$('.calendar').fullCalendar('renderEvent', copiedEventObject, true);
-						
-						// is the "remove after drop" checkbox checked?
-						if ($('#drop-remove').is(':checked')) {
-							// if so, remove the element from the "Draggable Events" list
-							$(this).remove();
-						}
-					},
+					editable: false,
+					droppable: false,
 					
 					defaultView: 'agendaWeek',
 					
