@@ -11,61 +11,94 @@ use Cake\I18n\FrozenTime;
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\TableRegistry;
 
+
 class MessengerTable extends Table{
     
      public function initialize(array $config)
     {
         $this->table('message');
-        $this->primaryKey('idmessage');
+        $this->primaryKey('id');
     }
+    
+    public function getMessages($myid, $param)
+    {
+        $myid="douille";
+        
+        $connection = ConnectionManager::get('default');
+        if($param='inbox')
+        {
+        $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+                . 'FROM `message_sent`, `message`, `user` '
+                . 'WHERE message_sent.to=user.id '
+                . 'AND user.id="'.$myid.'" '
+                . 'AND message.trashed=0 '
+                . 'AND message.id=message_sent.message'
+                . '')->fetchAll('assoc');
+        }else if($param='sent')
+        {
+            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+                . 'FROM `message_sent`, `message`, `user` '
+                . 'WHERE message_sent.from=user.id '
+                . 'AND user.id="'.$myid.'" '
+                . 'AND message.trashed=0 '
+                . 'AND message.id=message_sent.message'
+                . '')->fetchAll('assoc');
+        }else if($param='trashed')
+        {
+            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+                . 'FROM `message_sent`, `message`, `user` '
+                . 'WHERE (message_sent.to=user.id OR message_sent.from=user.id) '
+                . 'AND user.id="'.$myid.'" '
+                . 'AND message.trashed=1 '
+                . 'AND message.id=message_sent.message'
+                . '')->fetchAll('assoc');
+        }
+        return $messages;
+        
+    }
+    
     
     public function setMessage($to,$subject,$message,$myid)
     {
-        $me="douille";
-        $me=mysql_escape_string($me);
-        $message=mysql_escape_string($message);
-        $subject=mysql_escape_string($subject);
-        $myid=mysql_escape_string($myid);
+        $myid="douille";
         $id=md5(uniqid(rand(), true));
         $table = TableRegistry::get('message');
-        $query=$table->query();
-        $query->insert([
-            'idmessage',
-            'object',
-            'message',
-            ])
-        ->values([
-            'idmessage'=>$id,
-            'object'=>$subject,
-            'message'=>$message,
-            ])
-        ->execute();
+        $new=$table->newEntity();
+        $new->id=$id;
+        $new->object=$subject;
+        $new->message=$message;
+        $table->save($new);
         
-        debug($id);
         
         $table = TableRegistry::get('message_sent');
         for($i=0;$i<sizeof($to);$i++)
         {
-            $to[$i]=mysql_escape_string($to[$i]);
-            $connection = ConnectionManager::get('default');
-            $string=$connection->execute('INSERT INTO `message_sent` (`from`, `to`, `message`) '
-                    . 'SELECT user.userid AS fromuser, user.userid AS touser, message.idmessage '
-                    . 'FROM user, message '
-                    . 'WHERE user.userid= "'.$me.'" '
-                    . 'AND user.userid = "'.$to[$i].'" '
-                    . 'AND message.idmessage="'.$id.'"');            
+            $table=  TableRegistry::get('message');
+            $a=$table->find()->where(['id'=>$id])->count();
+            $table=  TableRegistry::get('user');
+            $b=$table->find()->where(['id'=>$myid])->count();
+            $c=$table->find()->where(['id'=>$to[$i]])->count();
+            
+            if($a*$b*$c=1){
+                $table= TableRegistry::get('message_sent');
+                $new=$table->newEntity();
+                $new->from=$myid;
+                $new->to=$to[$$i];
+                $new->message=$id;     
+            }
         }
         
     }
     
     public function getNotif($myid)
     {
+        if($myid==null || $myid =="")return '0';
         $connection = ConnectionManager::get('default');
-        $string=$connection->execute('SELECT COUNT(isread)
+        $string=$connection->execute('SELECT COUNT(read)
             FROM message AS m
-            INNER JOIN message_sent AS ms ON m.idmessage= ms.message
-            WHERE ms.to = "'.$myid.'" AND m.isread = 0')->fetchAll('assoc');
-        $string=$string[0]['COUNT(isread)'];
+            INNER JOIN message_sent AS ms ON m.id= ms.message
+            WHERE ms.to = "'.$myid.'" AND m.read = 0')->fetchAll('assoc');
+        $string=$string[0]['COUNT(read)'];
         return $string;
     }
 }

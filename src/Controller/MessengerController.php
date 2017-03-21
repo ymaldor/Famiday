@@ -7,7 +7,7 @@
  */
      
 namespace App\Controller;
-
+    
 use App\Controller\AppController;
 use function debug;
     
@@ -18,29 +18,48 @@ class MessengerController extends AppController{
     
     function newmessage()
     {
-        $this->loadModel('Messenger');
-        $notifinbox=$this->Messenger->getnotif($this->Session->check['Userid']);
+        $notifinbox=$this->Messenger->getnotif($this->request->Session()->read['Userid']);
         $this->set('notifinbox', $notifinbox);
             
             
         if ($this->request->is('post'))
-		{
-            debug($this->request->data);
-			if((isset($this->request->data)) && !empty($this->request->data['Message']))
-			{
-                            $this->Messenger->setMessage($this->request->data['To'], $this->request->data['Subject'],$this->request->data['Message'],$this->Session->check['Userid']);
-                            //$this->redirect(array('controller' => 'Messenger', 'action' => 'inbox'));
-                        }
+        {
+            if((isset($this->request->data)) && !empty($this->request->data['Message']))
+            {
+                $this->Messenger->setMessage($this->request->data['To'], $this->request->data['Subject'],$this->request->data['Message'],$this->Session->check['Userid']);
+                $this->redirect(array('controller' => 'Messenger', 'action' => 'inbox'));
+            }
         }
     }
-    
-    
+        
+        
     function inbox()
     {
         $this->loadModel('Messenger');
         $notifinbox=$this->Messenger->getNotif($this->Session->check['Userid']);
         $this->set('notifinbox', $notifinbox);
-        
+        $this->set('idmessage', " ");
+            
         $param=isset($this->request->query['param'])         ? $this->request->query['param']         : 1;
+        if($param=1)
+        {
+            $param='inbox';
+        }else if ($param=2)
+        {
+            $param='sent';
+        }else if ($param=3)
+        {
+            $param='trash';
+        }
+        $this->set('messages', $this->Messenger->getMessages($this->Session['userid'],$param));
+    }
+        
+        
+    function readmessage()
+    {
+        
+        $idmessage=isset($this->request->query['param'])         ? $this->request->query['param']         : "machin";
+        $this->set('idmessage', $idmessage);
+        $this->set('notifinbox', $this->Messenger->getNotif($this->Session->check['userid']));
     }
 }
