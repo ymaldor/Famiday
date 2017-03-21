@@ -13,29 +13,31 @@ class CalendarController extends AppController{
 	
 	function index()
     {
+		//Session
+		//$id = $session->read('id');
+		$id = 1;
+		
+		$this->loadModel('calendar');
+		
 		//Formulaire
 		if($this->request->is('post'))
 		{
 			if(isset($this->request->data))
 			{
-				$this->loadModel('calendar');
-				
 				//Eventname
 				$eventname = $this->request->data['nom_event'];
 				//Datetime start
 				$aa = date('Y');
 				$mmjj = explode("/", $this->request->data['debut_jjmm']);
-				$hhmm = str_replace(":", "-", $this->request->data['debut_jjmm']);
+				$hhmm = str_replace(":", "-", $this->request->data['debut_hhmm']);
 				$eventstart = $aa."-".$mmjj[1]."-".$mmjj[0]." ".$hhmm.":00";
 				//Datetime end
 				$aa = date('Y');
 				$mmjj = explode("/", $this->request->data['fin_jjmm']);
-				$hhmm = str_replace(":", "-", $this->request->data['fin_jjmm']);
+				$hhmm = str_replace(":", "-", $this->request->data['fin_hhmm']);
 				$eventend = $aa."-".$mmjj[1]."-".$mmjj[0]." ".$hhmm.":00";
 				//Participant
-				$tmp=$this->request->data['participant'];
-				$participant="";
-				for($i=0;$i<count($tmp);$i++) { $participant+=$tmp[$i]; }
+				$participant=implode(",", $this->request->data['participant']);
 				//Summary
 				$summary="";
 				//Last modif
@@ -53,12 +55,17 @@ class CalendarController extends AppController{
 		
 		//Event
 		$here = explode("/", $this->request->here());
-		//debug($here);
 		
-		$idpersonne = 0;
-		$this->set('event', $this->Calendar->recup_family($idpersonne));
-		
-		//debug($this->Calendar->recup_event($idpersonne));
+		if(isset($here[4]) and intval($here[4])!=0 and $this->Calendar->is_family($id, intval($here[4])))
+		{
+			//$idpersonne = intval($here[4]);
+			//$this->Calendar->recup_event($idpersonne);
+			//$this->set('event', $this->Calendar->recup_event($idpersonne));
+		}
+		else
+		{
+			
+		}
     }
 	
 	function suppr()

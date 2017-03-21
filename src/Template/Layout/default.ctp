@@ -48,6 +48,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
 		<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
 		<?= $this->Html->script('king-components.js') ?>
+		<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
+		<?= $this->Html->script('plugins/select2/select2.min.js') ?>
+		<?= $this->Html->script('king-page.js') ?>
 	</head>
 
 	<?php if(!isset($inscription)) { echo '

@@ -44,7 +44,7 @@ class CalendarTable extends Table{
 		$result=[];
 		for($i=0;$i<count($tmp);$i++)
 		{
-			$str=explode(",", $tmp[$i][4]);
+			$str=explode(",", $tmp[$i][5]);
 			for($j=0;$j<count($str);$j++)
 			{
 				if($str[$j]==$idpersonne)
@@ -80,6 +80,23 @@ class CalendarTable extends Table{
 		//$table=  TableRegistry::get('family');
 		//$a=$table->find()->where(['id' => $id])->count();
 		//if(!$a) return false;
+	}
+	
+	public function is_family($id, $idpersonne)
+	{
+		$famille = $this->recup_family($id);
+		$result = false;
+		
+		for($i=0;$i<count($famille);$i++)
+		{
+			if($famille[$i][0]==$idpersonne)
+			{
+				$result = true;
+				break;
+			}
+		}
+		
+		return $result;
 	}
 }
 
