@@ -53,7 +53,6 @@
 
 
 <!-- Javascript -->
-<?= $this->Html->script('Messenger/newmessage.js') ?>
 <?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
 <?= $this->Html->script('plugins/select2/select2.min.js') ?>
 <?= $this->Html->script('king-page.js') ?>
