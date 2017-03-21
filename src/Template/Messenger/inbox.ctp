@@ -1,6 +1,7 @@
-<?php 
-use Cake\I18n\Time;
-?>
+<div class="main-header" style="margin-bottom: 15px;">
+	<h2>Inbox</h2>
+	<em></em>
+</div>
 <div class="inbox">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-2">
