@@ -17,14 +17,14 @@
 			</div>
 			<div id="collapseOne" class="panel-collapse collapse">
 				<div class="panel-body">
-					<!--DEBUT FORM-->
 
+					<!--DEBUT FORM-->
 					
 					
 					
 				<?= $this->Form->create ('Famille', array('type' => 'post'))?>
-									<?= $this->Form->input ('nom') ?>
 									<?= $this->Form->input ('prenom')?>
+									<?= $this->Form->input ('nom') ?>
 									<?= $this->Form->input ('adress')?>
 									<?= $this->Form->input ('phone')?>
 
