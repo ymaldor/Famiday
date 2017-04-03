@@ -26,7 +26,7 @@ class FamilyTable extends Table{
 		$a='uogoiiuubuo';
 		$table = TableRegistry::get('personne'); //nom de la table
         $id=md5(uniqid(rand(),true));
-	$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
+		$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
         $tocard=$table->newEntity();
 		$tocard->id=$id;
 		$tocard->idfamily=$a;
@@ -42,19 +42,50 @@ class FamilyTable extends Table{
 		
 		
 		$table->save($tocard);
-		
-	
-	
-
-	
 	
 	
 	}
 	
-	public function remove_personne($idfamily, $userid)
+	
+	public function addfamily($familyname,$id) 
+	{
+	$table = TableRegistry::get('family'); //nom de la table
+        $id=md5(uniqid(rand(),true));
+		
+        $tocard=$table->newEntity();
+		$tocard->id=$id;
+		$tocard->familyname=$familyname;
+		
+		
+		$table->save($tocard);
+		$table=TableRegistry::get('personne');
+		$user=$table->find()->select(['id'])->where(['userid'=>$id]);
+	
+	
+	}
+	
+	
+	public function getfamily($id)
+	{
+		$table=TableRegistry::get('personne');
+		$idfam=$table->find()->where(['id'=>$id]);
+		debug($idfam);die();
+		$table=TableRegistry::get('family');
+		$family=$table->find()->where(['id'=>$idfam]);
+		
+		$table=TableRegistry::get('personne');
+		$personnes=$table->find()->where(['idfamily'=>$idfam]);
+		
+		$string[0]=$family;
+		$string[1]=$personnes;
+		return $string;
+	}
+	
+	
+	public function removepersonne($idfamily, $userid)
 	{ 
-		$bdd = ConnectionManager::get('personne');
-		$tmp = $bdd->execute("DELETE FROM personne WHERE idpersonne=$userid AND familyid=$idfamily");
+		$bdd = TableRegistry::get('personne');
+		$bdd->delete($id);
 	}
 }
 

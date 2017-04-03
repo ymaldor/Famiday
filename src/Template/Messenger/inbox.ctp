@@ -47,17 +47,11 @@
                             <col class="col-from">
                         </colgroup>
                         <tbody>
-                            <tr>
-                                <td><span class="from">Alice</span></td>
-                                <td><span class="message-label label2">New User</span>
-                                    <span class="title">New User Registration</span> <span class="preview">- A new user has been registered on your site but not yet activated. You can activate this user on </span></td>
-                             
-                                <td><span class="timestamp">12:01 PM</span></td>
-                            </tr>
                             <?php
                                 echo $this->Form->create('checkbox');
                                 for($i=0;$i<count($messages);$i++)
                                 {
+                                $tr="";
                                     $date=new Time($messages[$i]['datemessage']);
                                     if($date->isToday())
                                     {
@@ -73,15 +67,16 @@
                                     
                                     if(!$messages[$i]['isread'])
                                     {
-                                echo "<tr class=\"unread\">";
+                                        $tr+= "<tr class=\"unread\">";
                                     }else {
-                                        echo "<tr class=\"read\">";
+                                        $tr+= "<tr class=\"read\">";
                                     }
-                                    echo ""
+                                    $tr+= ""
                                     . "<td><span class=\"from\">".$messages[$i]['mail']."</span></td>"
                                     . "<td><span class=\"title\">".$messages[$i]['object']."</span><span class=\"preview\"></span></td>"
                                     . "<td><span class=\"timestamp\">".$date."</span></td>"
                                 . "</tr>"; 
+                                    echo $Html->link($tr,array('action'=>'readmessage', '?'=>$message[$i]['id']), array('escape'=>false));
                                 }
                             
                                 echo $this->Form->end();

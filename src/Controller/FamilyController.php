@@ -12,35 +12,26 @@ use App\Controller\AppController;
 class FamilyController extends AppController{
     
     function gestion()
-    {
+    {	
 		$id=$this->request->session()->read('id');
+		$this->loadModel('family');
+		
+		$b=$this->family->getfamily($id);
+		$this->set('family',$b);
+		
+		
+		
+		
+		
+		
 		if($this->request->is('post'))
 		{
-			$this->loadModel('family');
+			
 			$this->family->addpersonne($this->request->data,$id);
+			
 		}
 	}
 
-	function Formulaire()
-    {
-       if($this->request->is('post'))
-	   {
-			if(isset($this->request->data))
-			{
-			$this->loadModel('family');
-			$this->family->add_personne(	
-				$this->request->data['nom'],
-				$this->request->data['prenom'],
-				$this->request->data['about'],
-				$this->request->data['Sexe'],
-				$this->request->data['Statut'],
-				$this->request->data['Responsable'],
-				$this->request->data['adress'],
-				$this->request->data['phone'],
-				$this->request->data['datebirth']);
-			}
-	   }
-    }
 	
 	function removal()
     {
@@ -49,7 +40,7 @@ class FamilyController extends AppController{
 			if(isset($this->request->data))
 			{
 			$this->loadModel('Family');
-			$this->Family->remove_personne();
+			$this->Family->removepersonne();
 			
 			}
 	   }
