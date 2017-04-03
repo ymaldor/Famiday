@@ -33,6 +33,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->Html->css('bootstrap.min.css') ?>
 		<?= $this->Html->css('font-awesome.min.css') ?>
 		<?= $this->Html->css('main.min.css') ?>
+		
+		<?= $this->Html->css('calendar.css') ?>
 		<!--[if lte IE 9]>
 			<?= $this->Html->css('main-ie.css') ?>
 			<?= $this->Html->css('main-ie-part2.css') ?>
@@ -45,12 +47,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->Html->script('plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
 		<?= $this->Html->script('king-common.js') ?>
 		<?= $this->Html->script('jquery-ui/jquery-ui-1.10.4.custom.min.js') ?>
-		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.min.js') ?>
+		<?= $this->Html->script('plugins/fullcalendar/fullcalendar.js') ?>
 		<?= $this->Html->script('plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') ?>
 		<?= $this->Html->script('king-components.js') ?>
 		<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
 		<?= $this->Html->script('plugins/select2/select2.min.js') ?>
 		<?= $this->Html->script('king-page.js') ?>
+		
+		
+		
 	</head>
 
 	<?php if(!isset($inscription)) { echo '

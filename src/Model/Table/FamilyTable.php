@@ -18,14 +18,11 @@ class FamilyTable extends Table{
         $this->table('personne');
     }
 	
-	public function addpersonne($p,$id)
+	public function addpersonne($nom,$prenom,$adress,$phone,$datebirth, $about,$Sexe,$Statut,$responsable)
 	{ 
-		$table=TableRegistry::get('family');
-		$a=$table->find()->select('id')->where(['userid'=>$id]);
-		//if(count($a))return false;
-		$a='uogoiiuubuo';
 		$table = TableRegistry::get('personne'); //nom de la table
         $id=md5(uniqid(rand(),true));
+		
 		$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
         $tocard=$table->newEntity();
 		$tocard->id=$id;
@@ -39,8 +36,6 @@ class FamilyTable extends Table{
 		$tocard->Sexe=$p['Sexe'];
 		$tocard->Statut=$p['Statut'];
 		$tocard->Responsable=$p['Responsable'];
-		
-		
 		$table->save($tocard);
 	
 	
@@ -57,12 +52,8 @@ class FamilyTable extends Table{
 		$tocard->familyname=$familyname['name'];
 		
 		$table->save($tocard);
-		
-	
-	
 	}
-	
-	
+		
 	public function getfamily($id)
 	{
 		$table=TableRegistry::get('personne');
@@ -78,11 +69,10 @@ class FamilyTable extends Table{
 		return $string;
 	}
 	
-	
-	public function removepersonne($idfamily, $userid)
+	public function remove_personne($familyid, $idpersonne)
 	{ 
-		$bdd = TableRegistry::get('personne');
-		$bdd->delete($id);
+		$bdd = ConnectionManager::get('default');
+		$tmp = $bdd->execute("DELETE FROM member_of_family WHERE idpersonne=$idpersonne AND familyid=$familyid");
 	}
 	function isfamily($id)
 	{

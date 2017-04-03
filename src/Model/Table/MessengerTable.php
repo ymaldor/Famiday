@@ -27,7 +27,7 @@ class MessengerTable extends Table{
         $connection = ConnectionManager::get('default');
         if($param='inbox')
         {
-        $messages=$connection->execute('SELECT message.id, message.message, message.object, message.datemessage, message.read, user.mail '
+        $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE message_sent.to=user.id '
                 . 'AND user.id="'.$myid.'" '
@@ -36,7 +36,7 @@ class MessengerTable extends Table{
                 . '')->fetchAll('assoc');
         }else if($param='sent')
         {
-            $messages=$connection->execute('SELECT message.id, message.message, message.object, message.datemessage, message.read, user.mail '
+            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE message_sent.from=user.id '
                 . 'AND user.id="'.$myid.'" '
@@ -45,7 +45,7 @@ class MessengerTable extends Table{
                 . '')->fetchAll('assoc');
         }else if($param='trashed')
         {
-            $messages=$connection->execute('SELECT message.id, message.message, message.object, message.datemessage, message.read, user.mail '
+            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE (message_sent.to=user.id OR message_sent.from=user.id) '
                 . 'AND user.id="'.$myid.'" '
@@ -100,10 +100,5 @@ class MessengerTable extends Table{
             WHERE ms.to = "'.$myid.'" AND m.read = 0')->fetchAll('assoc');
         $string=$string[0]['COUNT(read)'];
         return $string;
-    }
-    public function getMessage($id)
-    {
-        $table=TableRegistry::get('message');
-        return $table->get($id);
     }
 }

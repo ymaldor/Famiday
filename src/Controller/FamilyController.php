@@ -21,11 +21,6 @@ class FamilyController extends AppController{
 		$b=$this->family->getfamily($id);
 		$this->set('family',$b);
 		
-		
-		
-		
-		
-		
 		if($this->request->is('post'))
 		{
 			
@@ -53,11 +48,11 @@ class FamilyController extends AppController{
 			if(isset($this->request->data))
 			{
 			$this->loadModel('Family');
-			$this->Family->removepersonne();
+			$this->Family->remove_personne($this->request->data);
 			
 			}
 	   }
-	   debug($this->request->data);
+	   //debug($this->request->data);
 	   
 	   $this->redirect(array(array('controller' => 'Family', 'action' => 'gestion')));
     }

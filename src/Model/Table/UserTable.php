@@ -29,7 +29,6 @@ class UserTable extends Table{
         $user->datecreation=$now;
         $user->online=0;
         $table->save($user);
-		return $id;
         /*$query=$table->query();
         $query->insert([
             'mail',
@@ -54,5 +53,14 @@ class UserTable extends Table{
     }
     return true;
 }*/
+
+    function loginUser($mail,$password){
+        $table=TableRegistry::get('user');
+        $a=false;
+        $a=$table->find()->where(['mail'=> $mail,
+            'password'=>$password])->toArray();
+        if (!$a){return false;}
+        return $a[0]['id'];
+    }
 
 }
