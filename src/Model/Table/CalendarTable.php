@@ -36,15 +36,28 @@ class CalendarTable extends Table{
 			  ->execute();
 	}
 	
+	public function recup_color($idpersonne)
+	{
+		$bdd = ConnectionManager::get('default');
+		$req = $bdd->prepare('SELECT color FROM personne WHERE id=:id');
+		$req->execute(array('id' => $idpersonne));
+		
+		return $req->fetch();
+	}
+	
 	public function recup_event($idpersonne)
 	{
 		$bdd = ConnectionManager::get('default');
 		$tmp = $bdd->execute('SELECT * FROM event')->fetchAll();
+		$color = $this->recup_color($idpersonne)[0];
+		$tmp[count($tmp)] = $color;
 		
 		$result=[];
 		for($i=0;$i<count($tmp);$i++)
 		{
 			$str=explode(",", $tmp[$i][5]);
+			$tmp[$i][count($tmp[$i])] = $color;
+			
 			for($j=0;$j<count($str);$j++)
 			{
 				if($str[$j]==$idpersonne)

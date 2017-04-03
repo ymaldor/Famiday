@@ -232,6 +232,7 @@
 								if($event[$i][3]!="") { echo",end: '".$event[$i][3]."'"; }
 								
 								echo ",allDay: false";
+								echo ",color: '".$event[$i][10]."'";
 								echo "}";
 								if($i<count($event)-1) { echo","; }
 							}
