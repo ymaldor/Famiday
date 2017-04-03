@@ -19,9 +19,17 @@ class UserTable extends Table{
     }
     function addUser($mail,$password)
     {
+        $id=md5(uniqid(rand(), true));
         $table = TableRegistry::get('user');
         $now=Time::now();
-        $query=$table->query();
+        $user=$table->newEntity();
+        $user->mail=$mail;
+        $user->password=$password;
+        $user->id=$id;
+        $user->datecreation=$now;
+        $user->online=0;
+        $table->save($user);
+        /*$query=$table->query();
         $query->insert([
             'mail',
             'password',
@@ -34,9 +42,9 @@ class UserTable extends Table{
             'datecreation'=>$now,
             'online'=>0
             ])
-        ->execute();
+        ->execute();*/
     }
-    public function beforeSave($options = array()) {
+    /*public function beforeSave($options = array()) {
     if (isset($this->data[$this->alias]['password'])) {
         $passwordHasher = new SimplePasswordHasher();
         $this->data[$this->alias]['password'] = $passwordHasher->hash(
@@ -44,6 +52,6 @@ class UserTable extends Table{
         );
     }
     return true;
-}
+}*/
 
 }

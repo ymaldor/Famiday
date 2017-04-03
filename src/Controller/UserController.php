@@ -38,6 +38,7 @@ class UserController extends AppController{
                             $this->request->data['password']
                             );   
                     }
+            $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
                         
                 
                 }
@@ -49,7 +50,7 @@ class UserController extends AppController{
         $this->set('inscription',1);
 
 
-        if($this->Session->check('userid'))
+        if($this->Session->check('id'))
         {
             $this->redirect(array('controller'=>'User', 'action'=>'index'));
         }
@@ -59,7 +60,7 @@ class UserController extends AppController{
                 $this->Session->write('mail',$this->request->data['mail']);
                 $this->Session->write('id',$id);
                 
-                $this->redirect(array('controller' => 'user', 'action' => 'home'));
+                $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
             }
             else {  
                 $this->set('message','Email ou mot de passe incorrect !');
