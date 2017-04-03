@@ -7,7 +7,7 @@
 			<button type="button" class="btn btn-auth-facebook"><span>Login via Facebook</span></button>
 			<div class="separator"><span>OR</span></div>
 			<div class="login-box center-block">
-				<form class="form-horizontal" method="post" action="/user/add">
+				<form class="form-horizontal" method="post">
 					<p class="title">Use your username</p>
 					<div class="form-group">
 						<label for="username" class="control-label sr-only">Username</label>
