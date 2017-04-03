@@ -20,7 +20,11 @@
 
 					<!--DEBUT FORM-->
 					
+					<?php
+					debug($family);
+					die();
 					
+					?>
 					
 				<?= $this->Form->create ('Famille', array('type' => 'post'))?>
 									<?= $this->Form->input ('prenom')?>
