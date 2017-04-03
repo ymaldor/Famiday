@@ -36,7 +36,7 @@ class MessengerController extends AppController{
     function inbox()
     {
         $this->loadModel('Messenger');
-        $notifinbox=$this->Messenger->getNotif($this->request->session()->read['id']);
+        $notifinbox=$this->Messenger->getNotif($this->request->session()->read('id'));
         $this->set('notifinbox', $notifinbox);
         $this->set('idmessage', " ");
             
@@ -51,7 +51,7 @@ class MessengerController extends AppController{
         {
             $param='trash';
         }
-        $this->set('messages', $this->Messenger->getMessages($this->request->Session()->read['id'],$param));
+        $this->set('messages', $this->Messenger->getMessages($this->request->Session()->read('id'),$param));
     }
         
         
