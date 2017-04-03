@@ -18,53 +18,43 @@ class FamilyTable extends Table{
         $this->table('personne');
     }
 	
-	public function add_personne($nom,$prenom,$adress,$phone,$datebirth, $about,$Sexe,$Statut,$responsable)
+	public function addpersonne($p,$id)
 	{ 
+		$table=TableRegistry::get('family');
+		$a=$table->find()->select('id')->where(['userid'=>$id]);
+		//if(count($a))return false;
+		$a='uogoiiuubuo';
 		$table = TableRegistry::get('personne'); //nom de la table
         $id=md5(uniqid(rand(),true));
+	$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
+        $tocard=$table->newEntity();
+		$tocard->id=$id;
+		$tocard->idfamily=$a;
+		$tocard->prenom=$p['prenom'];
+		$tocard->nom=$p['nom'];
+		$tocard->adress=$p['adress'];
+		$tocard->phone=$p['phone'];
+		$tocard->datebirth=$date;
+		$tocard->about=$p['about'];
+		$tocard->Sexe=$p['Sexe'];
+		$tocard->Statut=$p['Statut'];
+		$tocard->Responsable=$p['Responsable'];
 		
 		
+		$table->save($tocard);
 		
-		
-        $query = $table->query();
-        $query->insert(['nom', 'prenom', 'adress', 'phone','datebirth','about', 'sexe','statut','responsable'])
-              ->values([
-					'nom'=>$nom,
-					'prenom'=>$prenom,
-					'adress'=>$adress,
-					'phone'=>$phone,
-					'datebirth'=>$datebirth,
-					'about'=>$about,
-					'sexe'=>$Sexe,
-					'statut'=>$statut,
-					'responsable'=>$responsable
-					])
-			  ->execute();
 	
 	
+
 	
 	
-	
-	$members= TableRegistry::get('personne');
-	$family= TableRegistry::get('family');
-        $a=$family->find()->where(['id'=>$familyid])->count();
-        $b=$members->find()->where(['id'=>$id])->count();
-        if(($a*$b)!=1)return false;
-        
-        $message= TableRegistry::get('members_of_family');
-        
-        $newBind=$message->newEntity();
-        $newBind->idpersonne=$id;
-        $newBind->familyid=$familyid;
-        $newBind->responsible=boolresp;
-        $message->save($newBind);	
 	
 	}
 	
-	public function remove_personne($familyid, $idpersonne)
+	public function remove_personne($idfamily, $userid)
 	{ 
-		$bdd = ConnectionManager::get('default');
-		$tmp = $bdd->execute("DELETE FROM member_of_family WHERE idpersonne=$idpersonne AND familyid=$familyid");
+		$bdd = ConnectionManager::get('personne');
+		$tmp = $bdd->execute("DELETE FROM personne WHERE idpersonne=$userid AND familyid=$idfamily");
 	}
 }
 

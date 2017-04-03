@@ -29,7 +29,7 @@
 									<?= $this->Form->input ('phone')?>
 
 
-									<?= $this->Form->input ('datebirth');?>
+									<?= $this->Form->input ('datebirth',array('type'=>'date'))?>
 
 									<?= $this->Form->textarea('about')?>
 									<?= $this->Form->select(

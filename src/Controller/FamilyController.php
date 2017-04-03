@@ -13,6 +13,12 @@ class FamilyController extends AppController{
     
     function gestion()
     {
+		$id=$this->request->session()->read('id');
+		if($this->request->is('post'))
+		{
+			$this->loadModel('family');
+			$this->family->addpersonne($this->request->data,$id);
+		}
 	}
 
 	function Formulaire()
@@ -21,8 +27,8 @@ class FamilyController extends AppController{
 	   {
 			if(isset($this->request->data))
 			{
-			$this->loadModel('Family');
-			$this->Family->add_personne(	
+			$this->loadModel('family');
+			$this->family->add_personne(	
 				$this->request->data['nom'],
 				$this->request->data['prenom'],
 				$this->request->data['about'],
@@ -34,7 +40,6 @@ class FamilyController extends AppController{
 				$this->request->data['datebirth']);
 			}
 	   }
-	   debug($this->request->data);
     }
 	
 	function removal()
@@ -48,7 +53,7 @@ class FamilyController extends AppController{
 			
 			}
 	   }
-	   //debug($this->request->data);
+	   debug($this->request->data);
 	   
 	   $this->redirect(array(array('controller' => 'Family', 'action' => 'gestion')));
     }
