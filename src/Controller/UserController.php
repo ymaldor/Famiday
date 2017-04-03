@@ -21,6 +21,26 @@ class UserController extends AppController{
     function index()
     {
         $this->set('inscription',1);
+        if($this->Session->check('id'))
+        {
+            $this->redirect(array('controller'=>'User', 'action'=>'index'));
+        }
+        if(isset($this->request->data)){
+            
+            if(($id = $this->user->loginUser($this->request->data['mail'], $this->request->data['password'])) != 0){ 
+                $this->Session->write('mail',$this->request->data['mail']);
+                $this->Session->write('id',$id);
+                
+                $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
+            }
+            else {  
+                $this->set('message','Email ou mot de passe incorrect !');
+            }
+            
+        }
+        if (isset($this->user->data['message'])){
+            $this->set('message',$this->user->data['message']);
+        }
     }
 
     function register()
@@ -42,34 +62,12 @@ class UserController extends AppController{
                         
                 
                 }
-                debug($this->request->data);
+                
             }
     
     public function login()
     {
         $this->set('inscription',1);
-
-
-        if($this->Session->check('id'))
-        {
-            $this->redirect(array('controller'=>'User', 'action'=>'index'));
-        }
-        if(isset($this->request->data)){
-            
-            if(($id = $this->user->loginUser($this->request->data['mail'], $this->request->data['password'])) != 0){ 
-                $this->Session->write('mail',$this->request->data['mail']);
-                $this->Session->write('id',$id);
-                
-                $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
-            }
-            else {  
-                $this->set('message','Email ou mot de passe incorrect !');
-            }
-            
-        }
-        if (isset($this->user->data['message'])){
-            $this->set('message',$this->user->data['message']);
-        }
     }
     
     public function disconnect()
