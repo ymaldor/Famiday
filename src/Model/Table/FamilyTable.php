@@ -54,12 +54,10 @@ class FamilyTable extends Table{
 		
         $tocard=$table->newEntity();
 		$tocard->id=$id;
-		$tocard->familyname=$familyname;
-		
+		$tocard->familyname=$familyname['name'];
 		
 		$table->save($tocard);
-		$table=TableRegistry::get('personne');
-		$user=$table->find()->select(['id'])->where(['userid'=>$id]);
+		
 	
 	
 	}
@@ -69,7 +67,6 @@ class FamilyTable extends Table{
 	{
 		$table=TableRegistry::get('personne');
 		$idfam=$table->find()->where(['id'=>$id]);
-		debug($idfam);die();
 		$table=TableRegistry::get('family');
 		$family=$table->find()->where(['id'=>$idfam]);
 		
@@ -86,6 +83,13 @@ class FamilyTable extends Table{
 	{ 
 		$bdd = TableRegistry::get('personne');
 		$bdd->delete($id);
+	}
+	function isfamily($id)
+	{
+		$bdd = TableRegistry::get('personne');
+		$a=$bdd->find()->where(['userid'=>$id])->count();
+		if(!$a)return false;
+		return true;
 	}
 }
 

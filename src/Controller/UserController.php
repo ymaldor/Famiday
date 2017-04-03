@@ -21,10 +21,6 @@ class UserController extends AppController{
     function index()
     {
         $this->set('inscription',1);
-        if($this->Session->check('id'))
-        {
-            $this->redirect(array('controller'=>'User', 'action'=>'index'));
-        }
         if(isset($this->request->data)){
             
             if(($id = $this->user->loginUser($this->request->data['mail'], $this->request->data['password'])) != 0){ 
@@ -53,11 +49,12 @@ class UserController extends AppController{
             if(isset($this->request->data))
             {
                         $this->loadModel('User');
-                        $this->User->addUser(
+                        $id=$this->User->addUser(
                             $this->request->data['mail'],
                             $this->request->data['password']
                             );   
                     }
+                $this->request->session()->write('id',$id);
             $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
                         
                 

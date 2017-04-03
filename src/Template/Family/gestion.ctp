@@ -1,10 +1,13 @@
+
+		<?php
+					if($family!=false){
+					?>
 <div class="main-header" style="margin-bottom: 15px;">
 	<div class="row">
 		<div class="col-md-4">
 			<h2>Ma Famille</h2>
 			<em>Membres de ma famille</em>
 		</div>
-		
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
 		<div class="panel panel-default">
@@ -21,8 +24,6 @@
 					<!--DEBUT FORM-->
 					
 					<?php
-					debug($family);
-					die();
 					
 					?>
 					
@@ -144,3 +145,47 @@
 		</div>
 	</div>
 </div>	
+<?php 
+}else{
+?>
+<div class="main-header" style="margin-bottom: 15px;">
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Editer mon profil</h2>
+			<em>Donnez vos informations avant de créer une famille</em>
+		</div>
+		
+		<?= $this->Form->create ('Famille', array('type' => 'post'))?>
+									<?= $this->Form->input ('prenom')?>
+									<?= $this->Form->input ('nom') ?>
+									<?= $this->Form->input ('adress')?>
+									<?= $this->Form->input ('phone')?>
+
+
+									<?= $this->Form->input ('datebirth',array('type'=>'date'))?>
+
+									<?= $this->Form->textarea('about')?>
+									<?= $this->Form->select(
+										'Sexe',
+										[0 => 'Homme',1=>  'Femme'],
+										['empty' => '(choisissez)'])?>
+										
+									<?= $this->Form->select(
+										'Statut',
+										[ 'Garcon/Fille','Pere/Mere', 'Oncle/tente', 'Grand-pere/Grand-mere', 'Grand-oncle/Grand-tente', 'Cousin/Cousine', 'Tuteur/Tutrice'],
+										['empty' => '(choisissez)'] )?>
+										<?= $this->Form->select(
+										'Responsable',
+										[0 => 'Oui',1=>  'Non'],
+										['empty' => '(choisissez)'])?>
+										
+									
+					
+					
+				<?= $this->Form->submit('Ajouter');?>	
+					
+				<?= $this->Form->end ?>		
+				
+	</div>
+</div>	
+<?php } ?>

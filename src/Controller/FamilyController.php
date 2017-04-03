@@ -12,10 +12,12 @@ use App\Controller\AppController;
 class FamilyController extends AppController{
     
     function gestion()
-    {	
+    {
 		$id=$this->request->session()->read('id');
-		$this->loadModel('family');
 		
+		$this->loadModel('family');
+		if($this->family->isFamily($id))
+		{
 		$b=$this->family->getfamily($id);
 		$this->set('family',$b);
 		
@@ -30,6 +32,17 @@ class FamilyController extends AppController{
 			$this->family->addpersonne($this->request->data,$id);
 			
 		}
+		}
+		else{
+		$this->set('family',false);
+			if($this->request->is('post'))
+		{
+			$this->family->addfamily($this->request->data,$id);
+			$this->family->addpersonne($this->request->data,$id);
+			
+		}
+		}
+		
 	}
 
 	
