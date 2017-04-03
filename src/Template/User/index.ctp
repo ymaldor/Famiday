@@ -13,8 +13,9 @@
 						<label for="username" class="control-label sr-only">Username</label>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<input type="text" placeholder="username" id="username" class="form-control">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<?= $this->Form->create('Subscribe', array('type'=>'post')) ?>
+								<?= $this->Form->input('mail',array('type' => 'email','class'=>'form-control','placeholder'=>'Adresse mail','id'=>'username'))?>
+								<span class="input-group-addon"><i class="fa fa-user"> </i></span>
 							</div>
 						</div>
 					</div>
@@ -22,7 +23,7 @@
 					<div class="form-group">
 						<div class="col-sm-12">
 							<div class="input-group">
-								<input type="password" placeholder="password" id="password" class="form-control">
+								 <?= $this->Form->input('password',array('type' => 'password','class'=>'form-control','placeholder'=>'Mot de passe')) ?>
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 							</div>
 						</div>
@@ -32,6 +33,7 @@
 						<span>Remember me next time</span>
 					</label>
 					<button class="btn btn-custom-primary btn-lg btn-block btn-auth"><i class="fa fa-arrow-circle-o-right"></i> Login</button>
+					<?= $this->Form->end() ?>
 				</form>
 				<div class="links">
 					<p><a href="#">Forgot Username or Password?</a></p>

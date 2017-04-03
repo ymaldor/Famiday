@@ -8,6 +8,7 @@
 
 App::uses('AppModel','Model');
 App::uses('Security', 'Utility');
+App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 class UserModel extends AppModel{
     public $displayField = 'name';

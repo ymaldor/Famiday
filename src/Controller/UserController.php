@@ -16,6 +16,8 @@ class UserController extends AppController{
 
     //public $uses = array('user');
     
+    
+    
     function index()
     {
         $this->set('inscription',1);
@@ -30,14 +32,6 @@ class UserController extends AppController{
         {
             if(isset($this->request->data))
             {
-                /*$this->user->createUser($this->request->data['Subscribe']['mail'], $this->request->data['Subscribe']['password']);
-                if (isset($this->user->data['user']['create']))
-                {
-                    $id = $this->user->loginUser($this->request->data['Subscribe']['mail'], $this->request->data['Subscribe']['password']);
-                    $this->Session->write('mail',$this->request->data['Subscribe']['mail']);
-                    $this->Session->write('userid',$id);
-                    $this->redirect(array('controller' => 'User', 'action' => 'home'));  
-                }*/
                         $this->loadModel('User');
                         $this->User->addUser(
                             $this->request->data['mail'],
@@ -54,43 +48,45 @@ class UserController extends AppController{
     {
         $this->set('inscription',1);
 
-        
+
         if($this->Session->check('userid'))
         {
             $this->redirect(array('controller'=>'User', 'action'=>'index'));
         }
-        if ($this->request->is('post')){
-            /*if(isset($this->request->data['LostPass'])){
-                $newpass = $this->user->lostPass($this->request->data['LostPass']['mail']);
-                $this->set('mail','Envoyé à l\'addresse mail :' . $this->request->data['LostPass']['mail'] . '. Votre mot de passe a été réinitialisé, voici le nouveau : ' . $newpass . '. Pensez à le changer !');
-            }*/
-            if(isset($this->request->data['Connection'])){
+        if(isset($this->request->data)){
+            
+            if(($id = $this->user->loginUser($this->request->data['mail'], $this->request->data['password'])) != 0){ 
+                $this->Session->write('mail',$this->request->data['mail']);
+                $this->Session->write('id',$id);
                 
-                if(($id = $this->user->loginUser($this->request->data['Connection']['mail'], $this->request->data['Connection']['password'])) != 0){ 
-                    $this->Session->write('mail',$this->request->data['Connection']['mail']);
-                    $this->Session->write('userid',$id);
-                    
-                    $this->redirect(array('controller' => 'user', 'action' => 'home'));
-                }
-                else {  
-                    $this->set('message','Email ou mot de passe incorrect !');
-                }
-                
+                $this->redirect(array('controller' => 'user', 'action' => 'home'));
             }
-            if (isset($this->user->data['user']['message'])){
-                $this->set('message',$this->user->data['user']['message']);
+            else {  
+                $this->set('message','Email ou mot de passe incorrect !');
             }
+            
+        }
+        if (isset($this->user->data['message'])){
+            $this->set('message',$this->user->data['message']);
         }
     }
     
     public function disconnect()
     {
-        if($this->Session->check('userid'))
+        if($this->Session->check('id'))
         {
-            $this->Session->delete('userid');
+            $this->Session->delete('id');
             //$this->Session->delete('id_player');
-            $this->Session->delete('email');
+            $this->Session->delete('mail');
         }
         $this->redirect(array('controller' => 'user', 'action' => 'index'));
     } 
+
+
+
+
+    
+    public function logout() {
+        return $this->redirect($this->Auth->logout());
+    }
 }
