@@ -29,6 +29,7 @@ class UserTable extends Table{
         $user->datecreation=$now;
         $user->online=0;
         $table->save($user);
+		return $id;
         /*$query=$table->query();
         $query->insert([
             'mail',
