@@ -54,4 +54,13 @@ class UserTable extends Table{
     return true;
 }*/
 
+    function loginUser($mail,$password){
+        $table=TableRegistry::get('user');
+        $a=false;
+        $a=$table->find()->where(['mail'=> $mail,
+            'password'=>$password])->toArray();
+        if (!$a){return false;}
+        return $a[0]['id'];
+    }
+
 }
