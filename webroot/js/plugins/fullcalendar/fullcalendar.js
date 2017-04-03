@@ -70,10 +70,10 @@ var defaults = {
 		next: "<span class='fc-text-arrow'>&rsaquo;</span>",
 		prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
 		nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
-		today: 'today',
-		month: 'month',
-		week: 'week',
-		day: 'day'
+		today: 'aujourd\'hui',
+		month: 'mois',
+		week: 'semaine',
+		day: 'jour'
 	},
 	
 	// jquery-ui theming
@@ -2752,7 +2752,7 @@ function AgendaDayView(element, calendar) {
 ;;
 
 setDefaults({
-	allDaySlot: true,
+	allDaySlot: false,
 	allDayText: 'all-day',
 	firstHour: 6,
 	slotMinutes: 30,
