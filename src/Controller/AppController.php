@@ -70,23 +70,11 @@ class AppController extends Controller
 	public function beforeFilter(Event $event)
     {
 		//Session
-		//$id = $session->read('id');$session=$this->request->session();
-
-        
-        $session=$this->request->session();
-        
-        
-        if(($session->check('id')==null || !$session->check('id')) && (($this->request->params['controller']!='user' && $this->request->params['action']!='index' && $this->request->params['action']!='login' && $this->request->params['action']!='register') ))
-        {
-            $this->redirect(array('controller'=>'user', '?' => array('url' => $this->request->params['action'])));
-        }
-        if($session->check('id'))
-        {
-	$id=$session->read('id');
+		//$id = $session->read('id');
+		$id = 1;
+		
         $this->loadModel('Calendar');
 		$this->set('family', $this->Calendar->recup_family($id));
-            
-        }
     }
 }
 

@@ -20,11 +20,7 @@
 
 					<!--DEBUT FORM-->
 					
-					<?php
-					debug($family);
-					die();
 					
-					?>
 					
 				<?= $this->Form->create ('Famille', array('type' => 'post'))?>
 									<?= $this->Form->input ('prenom')?>
@@ -33,7 +29,7 @@
 									<?= $this->Form->input ('phone')?>
 
 
-									<?= $this->Form->input ('datebirth',array('type'=>'date'))?>
+									<?= $this->Form->input ('datebirth');?>
 
 									<?= $this->Form->textarea('about')?>
 									<?= $this->Form->select(
