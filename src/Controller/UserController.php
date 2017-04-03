@@ -21,7 +21,6 @@ class UserController extends AppController{
     function index()
     {
         $this->set('inscription',1);
-        if(isset($this->request->data)){
             
         $this->loadModel('user');
         if($this->request->is('post')){
@@ -61,9 +60,10 @@ class UserController extends AppController{
                 
                 }
                 
-            }
+	}
+	
     
-    public function login()
+    function login()
     {
         $this->set('inscription',1);
     }

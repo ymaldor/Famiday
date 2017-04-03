@@ -18,22 +18,23 @@ class FamilyController extends AppController{
 		$this->loadModel('family');
 		if($this->family->isFamily($id))
 		{
-		$b=$this->family->getfamily($id);
-		$this->set('family',$b);
 		
 		if($this->request->is('post'))
 		{
 			
-			$this->family->addpersonne($this->request->data,$id);
+			$this->family->addpersonne($this->request->data,false,false,$id);
 			
 		}
+		$b=$this->family->getfamily($id);
+		$this->set('fam',$b);
 		}
 		else{
-		$this->set('family',false);
+		$this->set('fam',false);
 			if($this->request->is('post'))
 		{
-			$this->family->addfamily($this->request->data,$id);
-			$this->family->addpersonne($this->request->data,$id);
+			
+			$idfam=$this->family->addfamily($this->request->data);
+			$this->family->addpersonne($this->request->data,$idfam,$id,false);
 			
 		}
 		}
@@ -43,18 +44,15 @@ class FamilyController extends AppController{
 	
 	function removal()
     {
-       if($this->request->is('post'))
-	   {
-			if(isset($this->request->data))
-			{
+		$idpersonne=isset($this->request->query[0])         ? $this->request->query[0]         : null;
 			$this->loadModel('Family');
-			$this->Family->remove_personne($this->request->data);
+			$this->Family->removepersonne($idpersonne);
 			
-			}
-	   }
+			
+	   
 	   //debug($this->request->data);
 	   
-	   $this->redirect(array(array('controller' => 'Family', 'action' => 'gestion')));
+	   $this->redirect(array('controller' => 'Family', 'action' => 'gestion'));
     }
 }
 

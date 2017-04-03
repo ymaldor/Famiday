@@ -13,20 +13,38 @@ use Cake\ORM\TableRegistry;
 
 class FamilyTable extends Table{
     
-    public function initialize(array $config)
-    {
-        $this->table('personne');
-    }
-	
-	public function addpersonne($nom,$prenom,$adress,$phone,$datebirth, $about,$Sexe,$Statut,$responsable)
+	public function addfamily($p) 
+	{
+		$tfam = TableRegistry::get('family'); //nom de la table
+        $id=md5(uniqid(rand(),true));
+		
+        $fam=$tfam->newEntity();
+		$fam->id=$id;
+		$fam->familyname=$p['nom'];
+		
+		$tfam->save($fam);
+		return $id;
+	}
+	public function addpersonne($p,$idfam,$iduser,$idlog)
 	{ 
+		if($iduser==false)
+		{
+			$iduser=null;
+		}
+		if($idfam==false){
+		
+			$table=TableRegistry::get('personne');
+			$a=$table->find()->select(['idfamily'])->where(['userid'=>$idlog])->toArray();
+			$idfam=$a[0]['idfamily'];
+		}
 		$table = TableRegistry::get('personne'); //nom de la table
         $id=md5(uniqid(rand(),true));
 		
 		$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
         $tocard=$table->newEntity();
 		$tocard->id=$id;
-		$tocard->idfamily=$a;
+		$tocard->userid=$iduser;
+		$tocard->idfamily=$idfam;
 		$tocard->prenom=$p['prenom'];
 		$tocard->nom=$p['nom'];
 		$tocard->adress=$p['adress'];
@@ -42,37 +60,32 @@ class FamilyTable extends Table{
 	}
 	
 	
-	public function addfamily($familyname,$id) 
-	{
-	$table = TableRegistry::get('family'); //nom de la table
-        $id=md5(uniqid(rand(),true));
-		
-        $tocard=$table->newEntity();
-		$tocard->id=$id;
-		$tocard->familyname=$familyname['name'];
-		
-		$table->save($tocard);
-	}
+	
 		
 	public function getfamily($id)
 	{
 		$table=TableRegistry::get('personne');
-		$idfam=$table->find()->where(['id'=>$id]);
+		$idfam=$table->find()->select('idfamily')->where(['userid'=>$id])->toArray()[0]['idfamily'];
 		$table=TableRegistry::get('family');
-		$family=$table->find()->where(['id'=>$idfam]);
+		$family=$table->find()->where(['id'=>$idfam])->toArray()[0];
 		
 		$table=TableRegistry::get('personne');
-		$personnes=$table->find()->where(['idfamily'=>$idfam]);
+		$personnes=$table->find()->where(['idfamily'=>$idfam])->toArray();
 		
 		$string[0]=$family;
 		$string[1]=$personnes;
 		return $string;
 	}
 	
-	public function remove_personne($familyid, $idpersonne)
-	{ 
-		$bdd = ConnectionManager::get('default');
-		$tmp = $bdd->execute("DELETE FROM member_of_family WHERE idpersonne=$idpersonne AND familyid=$familyid");
+	public function removepersonne($idpersonne)
+	 { 
+		$table=TableRegistry::get('personne');
+		//if($idpersonne==null)return false;
+		$a=$table->get($idpersonne);
+		if($a->userid==null)
+		{
+			$table->delete($a);
+		}
 	}
 	function isfamily($id)
 	{

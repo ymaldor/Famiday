@@ -1,6 +1,6 @@
 
 		<?php
-					if($family!=false){
+					if($fam!=false){
 					?>
 <div class="main-header" style="margin-bottom: 15px;">
 	<div class="row">
@@ -32,7 +32,7 @@
 									<?= $this->Form->input ('phone')?>
 
 
-									<?= $this->Form->input ('datebirth');?>
+									<?= $this->Form->input ('datebirth',array('type'=>'date'));?>
 
 									<?= $this->Form->textarea('about')?>
 									<?= $this->Form->select(
@@ -60,29 +60,7 @@
 				</div>
 			</div>
 		</div>
-			<div class="panel panel-default">
-				<div class="btn-danger btn-block">
-					<h4 class="panel-title text-center">
-						<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="color:white; text-decoration:none;">
-							<i class="fa fa-plus-circle" style="position:relative; top:-1px;"></i><i class="fa fa-plus-circle"></i> RETIRER UN MEMBRE DE LA FAMILLE
-						</a>
-					</h4>
-				</div>
-				
-				<div id="collapseTwo" class="panel-collapse collapse">			
-				
-					<div class="panel-body">
-																									
-									<?= $this->Form->create ('Famille', array('type' => 'remove', 'url' => 'family/removal',))?>
-																	
-									<?= $this->Form->submit('Retirer');?>	
-						
-									<?= $this->Form->end ?>		
-						
-						
-					</div>
-				</div>
-			</div>
+			
 		</div>
 
 		
@@ -98,41 +76,34 @@
 			<div id="external-events">
 				<div class="row">
 				
+					<?php
 					
-					<div class="col-md-4">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"><?='FDP nb I' ?></h3>
-							</div>
-							
-							<div class="panel-body" style="padding: 0 15px 0 0;">
-								<div class="col-sm-5" style="padding: 0;">
-									<?= $this->Html->image('profile-avatar.png', ['alt'=>'Profile Picture', 'style'=>'width: 100%; height: 100%;']) ?>
+					foreach($fam[1] as $f)
+					{
+						echo '<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+										'.$f['prenom'].' '.$f['nom'].'
+										</h3>
+										'.$this->Html->link("retirer", array('controller'=>'family','action'=>'removal', '?'=>$f['id'])).'
+									</div>
+									
+									<div lass="panel-body" style="padding: 0 15px 0 0;">
+										<div class="col-sm-5" style="padding: 0;">
+											'.$this->Html->image($f['id'].'.jpg').'
+										</div>
+										<div class="col-sm-7" style="padding: 15px;">
+											'.$f['about'].'
+										
+										</div>
+									</div>
 								</div>
-								<div class="col-sm-7" style="padding: 15px;">
-										fiudiudfzhoxufh
-								</div>
-							</div>
-						</div>
-					</div>
+							</div>';
+					}
 					
+					?>
 					
-					<div class="col-md-4">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"><?= 'FDP nb II' ?></h3>
-							</div>
-							
-							<div class="panel-body" style="padding: 0 15px 0 0;">
-								<div class="col-sm-5" style="padding: 0;">
-									<?= $this->Html->image('profile-avatar.png', ['alt'=>'Profile Picture', 'style'=>'width: 100%; height: 100%;']) ?>
-								</div>
-								<div class="col-sm-7" style="padding: 15px;">
-										fiudiudfzhoxufh
-								</div>
-							</div>
-						</div>
-					</div>
 					
 					
 					
