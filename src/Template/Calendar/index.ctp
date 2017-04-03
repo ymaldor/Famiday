@@ -55,13 +55,7 @@
 																					'placeholder'=>'heure fin (hh:mm)')) ?>
 										</div>
 										
-										<?php
-										$options = []; 
-										for($i=0;$i<count($family);$i++)
-										{
-											$options[$family[$i][0]] = $family[$i][1].' '.$family[$i][2];
-										}
-										?>
+										<?php $options= array( '1'=>'douille','2'=>'machin', '3'=> 'truc', '4' => 'bidule'); ?>
 										<?= $this->Form->input('participant',array(	'type'=>'select',
 																					'multiple'=>'true',
 																					'label'=>False,
@@ -122,13 +116,8 @@
 										
 										<!--DEBUT INVISIBLE FORM-->
 										<?= $this->Form->create('Formulaire', array('type'=>'post', 'id'=>'hiddenform', 'url' => ['controller' => 'Calendar', 'action' => 'suppr']))?>
-										<?php
-											$value="";
-											if(isset($event)) { $value = $event[0][0]; }
-										?>
 										<?= $this->Form->input('TheChosenOne',array('type'=>'text',
-																					'id'=>'TheChosenOne',
-																					'value'=> $value,
+																					'id'=>'hiddeninput',
 																					'label'=>False,
 																					'style'=>'display:none;')) ?>
 										<?= $this->Form->submit('Supprimer l\'event',array(
@@ -144,7 +133,8 @@
 										
 										<script type="text/javascript">
 											$('.FORM').on('change', function (e) {
-												hiddeninput = document.getElementById('TheChosenOne');
+												hiddenform = document.getElementById('hiddenform');
+												hiddeninput = document.getElementById('hiddeninput');
 												index = document.getElementById('select1').value;
 												
 												hiddeninput.value = index;
@@ -163,6 +153,7 @@
 			<div class="calendar"></div>
 			<!-- king-components.js **ligne 500** -->
 
+		
 		<script type="text/javascript">
 			//*******************************************
 			/*	CALENDAR PAGE
@@ -208,19 +199,6 @@
 					
 					defaultView: 'agendaWeek',
 					
-					axisFormat: 'h:mm',
-					columnFormat: {
-						month: 'ddd',    // Mon
-						week: 'ddd d', // Mon 7
-						day: 'dddd M/d',  // Monday 9/7
-						agendaDay: 'dddd d'
-					},
-					titleFormat: {
-						month: 'MMMM yyyy', // September 2009
-						week: "MMMM yyyy", // September 2009
-						day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
-					},
-					
 					<?php
 						if(isset($event) and $event!=[])
 						{
@@ -241,6 +219,28 @@
 				
 				});
 				
+				$colorPicker = $('select[name="colorpicker-picker-longlist"]');
+				$colorPicker.simplecolorpicker({
+					picker: false, 
+					theme: 'fontawesome'
+				});
+
+				$('#btn-quick-event').click( function() {
+					
+					var originalEventObject = $(this).data('eventObject');
+					var copiedEventObject = $.extend({}, originalEventObject);
+					var eventTitle = 'Untitled Event';
+
+					if( $('#quick-event-name').val() != '' ) {
+						eventTitle = $('#quick-event-name').val();
+					}
+					
+					copiedEventObject.title = eventTitle;
+					copiedEventObject.start = date; // today
+					copiedEventObject.color = $colorPicker.val();
+						
+					$('.calendar').fullCalendar('renderEvent', copiedEventObject, true);
+				});
 
 			} // end calendar page demo
 		</script>

@@ -14,7 +14,6 @@ class CalendarController extends AppController{
 	function index()
     {
 		//Session
-		$session = $this->request->session();
 		//$id = $session->read('id');
 		$id = 1;
 		
@@ -59,15 +58,13 @@ class CalendarController extends AppController{
 		
 		if(isset($here[4]) and intval($here[4])!=0 and $this->Calendar->is_family($id, intval($here[4])))
 		{
-			$idpersonne = intval($here[4]);
-			$this->Calendar->recup_event($idpersonne);
-			$this->set('event', $this->Calendar->recup_event($idpersonne));
-			
-			$session->write('idpersonne',$idpersonne);
+			//$idpersonne = intval($here[4]);
+			//$this->Calendar->recup_event($idpersonne);
+			//$this->set('event', $this->Calendar->recup_event($idpersonne));
 		}
 		else
 		{
-			$session->write('idpersonne',0);
+			
 		}
     }
 	
@@ -78,15 +75,11 @@ class CalendarController extends AppController{
 		{
 			if(isset($this->request->data))
 			{
-				$session = $this->request->session();
+				$this->loadModel('calendar');
+				$this->Calendar->suppr_event($this->request->data['TheChosenOne']);
 				
-				if(intval($this->request->data['TheChosenOne'])!=0)
-				{
-					$this->loadModel('Calendar');
-					$this->Calendar->suppr_event($this->request->data['TheChosenOne']);
-				}
-				
-				$this->redirect(array('controller' => 'Calendar', 'action' => 'index/'.$session->read('idpersonne')));
+				$this->redirect(array('controller' => 'Calendar', 'action' => 'index'));
+				//$this->Calendar->add_event();
 			}
 		}
     }
