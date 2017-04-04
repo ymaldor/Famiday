@@ -4,30 +4,34 @@
 			<div class="logo">
 				<a href="index.html"><?= $this->Html->image('kingadmin-logo.png'); ?></a>
 			</div>
-			<button type="button" class="btn btn-auth-facebook"><span>Login via Facebook</span></button>
-			<div class="separator"><span>OR</span></div>
+			
 			<div class="login-box center-block">
 				<form class="form-horizontal" method="post">
-					<p class="title">Use your username</p>
+					<p class="title">Utilise tes identifiants</p>
+					
 					<div class="form-group">
 						<label for="username" class="control-label sr-only">Username</label>
 						<div class="col-sm-12">
 							<div class="input-group">
 								<?= $this->Form->create('Subscribe', array('type'=>'post')) ?>
-								<?= $this->Form->input('mail',array('type' => 'email','class'=>'form-control','placeholder'=>'Adresse mail','id'=>'username'))?>
+								<?= $this->Form->input('mail',array('type' => 'email','class'=>'form-control','placeholder'=>'Adresse mail','id'=>'username','label'=>false))?>
 								<span class="input-group-addon"><i class="fa fa-user"> </i></span>
 							</div>
 						</div>
 					</div>
+					
 					<label for="password" class="control-label sr-only">Password</label>
 					<div class="form-group">
 						<div class="col-sm-12">
 							<div class="input-group">
-								 <?= $this->Form->input('password',array('type' => 'password','class'=>'form-control','placeholder'=>'Mot de passe')) ?>
+								 <?= $this->Form->input('password',array('type' => 'password','class'=>'form-control','placeholder'=>'Mot de passe','label'=>false)) ?>
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 							</div>
 						</div>
 					</div>
+					
+					
+					
 					<label class="fancy-checkbox">
 						<input type="checkbox">
 						<span>Remember me next time</span>
@@ -36,8 +40,7 @@
 					<?= $this->Form->end() ?>
 				</form>
 				<div class="links">
-					<p><a href="#">Forgot Username or Password?</a></p>
-					<p><a href="#">Create New Account</a></p>
+					<p><?= $this->Html->link('Pas incrit ? Clique ici pour nous rejoindre !', array('controller'=>'User', 'action'=>'register')) ?></p>
 				</div>
 			</div>
 		</div>

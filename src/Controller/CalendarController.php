@@ -15,8 +15,7 @@ class CalendarController extends AppController{
     {
 		//Session
 		$session = $this->request->session();
-		//$id = $session->read('id');
-		$id = 1;
+		$id = $session->read('id');
 		
 		$this->loadModel('calendar');
 		

@@ -9,14 +9,6 @@
             </div>
             <!-- end logo -->
             <div class="pull-right right">
-                <div class="searchbox">
-                    <div id="tour-searchbox" class="input-group">
-                        <input class="form-control" placeholder="enter keyword here..." type="search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </div>
                 <!-- top-bar-right -->
                     <div class="top-bar-right">
                                                     
@@ -37,7 +29,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                                                                                                <?= $this->Html->image('user1.png'); ?>
+														<?= $this->Html->image('user1.png'); ?>
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading name">Antonius</h5>
@@ -51,7 +43,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                                                                                                <?= $this->Html->image('user2.png'); ?>
+														<?= $this->Html->image('user2.png'); ?>
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading name">Michael</h5>
@@ -65,7 +57,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                                                                                                <?= $this->Html->image('user3.png'); ?>
+														<?= $this->Html->image('user3.png'); ?>
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading name">Stella</h5>
@@ -79,7 +71,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                                                                                                <?= $this->Html->image('user4.png'); ?>
+														<?= $this->Html->image('user4.png'); ?>
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading name">Jane Doe</h5>
@@ -93,7 +85,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                                                                                                <?= $this->Html->image('user5.png'); ?>
+														<?= $this->Html->image('user5.png'); ?>
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading name">John Simmons</h5>
