@@ -72,9 +72,9 @@ class UserController extends AppController{
     {
         if($this->request->Session()->check('id'))
         {
-            $this->Session->delete('id');
+            $this->request->Session()->delete('id');
             //$this->Session->delete('id_player');
-            $this->Session->delete('mail');
+            $this->request->Session()->delete('mail');
         }
         $this->redirect(array('controller' => 'user', 'action' => 'index'));
     } 
