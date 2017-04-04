@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-10">
                 <div class="top-menu">
-                    <?= include("list-inline.ctp"); ?>
+                    <?php include("list-inline.ctp"); ?>
                 </div>
                         <!-- /top-menu -->
                     </div>
@@ -30,7 +30,7 @@
             <div class="bottom">
                 <div class="row">
                     <!-- inbox left menu -->
-                    <?= include("messagesleftmenu.ctp") ?>
+                    <?php include("messagesleftmenu.ctp"); ?>
                     <!-- end inbox left menu -->
                     <!-- right main content, single message view -->
                     <div class="col-xs-12 col-sm-9 col-lg-10">

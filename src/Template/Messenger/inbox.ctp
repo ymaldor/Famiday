@@ -21,7 +21,7 @@ use Cake\I18n\Time;
             </div>
             <div class="col-lg-10">
                 <div class="top-menu">
-                    <?= include("list-inline.ctp"); ?>
+                    <?php include("list-inline.ctp"); ?>
                 </div>
                 <!-- /top-menu -->
             </div>
