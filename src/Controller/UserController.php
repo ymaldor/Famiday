@@ -70,7 +70,7 @@ class UserController extends AppController{
     
     public function disconnect()
     {
-        if($this->Session->check('id'))
+        if($this->request->Session()->check('id'))
         {
             $this->Session->delete('id');
             //$this->Session->delete('id_player');
