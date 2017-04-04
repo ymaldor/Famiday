@@ -62,5 +62,9 @@ class UserTable extends Table{
         if (!$a){return false;}
         return $a[0]['id'];
     }
-
+    public function getMembers($id){
+        $table=TableRegistry::get('User');
+        $string=$table->find()->where(['id !='=>$id])->toArray();
+        return $string;
+    }
 }

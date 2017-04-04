@@ -16,8 +16,13 @@
                     <div class="new-message-form">
                                             <?= $this->Form->create('newmessage',array('type' => 'post' , 'class' => 'form-horizontal', 'role' => 'form')) ?>
                         <div class="form-group" class="col-sm-10">
-                                                    <?php $options= array( 'douille'=>'douille','machin'=>'machin', 'truc'=> 'truc', 'bidule' => 'bidule'); ?>
                                                     <?= $this->Form->label('To.to', 'To',array('class' =>'col-sm-2 control-label')) ?>
+                            <?php 
+                                for($i=0;$i<count($options);$i++)
+                                {
+                                    $options[$i]=$options[$i]['mail'];
+                                }
+                            ?>
                                                     <div style="float:right;width:83.3%;">
                                                             <?= $this->Form->input('To',array('type' => 'select', 'multiple' => 'true','label' => false,  'options' => $options, 'class' => 'col-sm-10', 'class' => 'select2','id' => 'message-from-select' )) ?>
                                                     </div>

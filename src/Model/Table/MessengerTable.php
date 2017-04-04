@@ -14,11 +14,6 @@ use Cake\ORM\TableRegistry;
 
 class MessengerTable extends Table{
     
-     public function initialize(array $config)
-    {
-        $this->table('message');
-        $this->primaryKey('id');
-    }
     
     public function getMessages($myid, $param)
     {
@@ -58,17 +53,18 @@ class MessengerTable extends Table{
     }
     
     
-    public function setMessage($to,$subject,$message,$myid)
+    public function setMessage($members,$to,$subject,$message,$myid)
     {
-        $myid="douille";
         $id=md5(uniqid(rand(), true));
         $table = TableRegistry::get('message');
         $new=$table->newEntity();
+        $new->datemessage=Time::now();
         $new->id=$id;
         $new->object=$subject;
         $new->message=$message;
+        $new->trashed=0;
+        $new->read=0;
         $table->save($new);
-        
         
         $table = TableRegistry::get('message_sent');
         for($i=0;$i<sizeof($to);$i++)
@@ -77,14 +73,14 @@ class MessengerTable extends Table{
             $a=$table->find()->where(['id'=>$id])->count();
             $table=  TableRegistry::get('user');
             $b=$table->find()->where(['id'=>$myid])->count();
-            $c=$table->find()->where(['id'=>$to[$i]])->count();
-            
+            $c=$table->find()->where(['id'=>$members[$to[$i]]['id']])->count();
             if($a*$b*$c=1){
                 $table= TableRegistry::get('message_sent');
                 $new=$table->newEntity();
                 $new->from=$myid;
-                $new->to=$to[$$i];
-                $new->message=$id;     
+                $new->to=$members[$to[$i]]['id'];
+                $new->message=$id;
+                $table->save($new);
             }
         }
         
@@ -94,11 +90,12 @@ class MessengerTable extends Table{
     {
         if($myid==null || $myid =="")return '0';
         $connection = ConnectionManager::get('default');
-        $string=$connection->execute('SELECT COUNT(read)
-            FROM message AS m
-            INNER JOIN message_sent AS ms ON m.id= ms.message
-            WHERE ms.to = "'.$myid.'" AND m.read = 0')->fetchAll('assoc');
-        $string=$string[0]['COUNT(read)'];
+        $string=$connection->execute('SELECT COUNT(`read`) '
+                . 'FROM message AS m '
+                . 'INNER JOIN message_sent ON m.id= message_sent.message '
+                . 'WHERE message_sent.to = "'.$myid.'" AND m.`read` = 0')->fetchAll('assoc');
+        
+        $string=$string[0]['COUNT(`read`)'];
         return $string;
     }
 }

@@ -18,15 +18,20 @@ class MessengerController extends AppController{
     
     function newmessage()
     {
-        $notifinbox=$this->Messenger->getnotif($this->request->Session()->read['id']);
+        $id=$this->request->session()->read('id');
+        $notifinbox=$this->Messenger->getnotif($this->request->Session()->read('id'));
         $this->set('notifinbox', $notifinbox);
-            
-            
+        $this->loadModel('User');
+        $members=$this->User->getMembers($id);
+        $this->set('options', $members);
         if ($this->request->is('post'))
         {
             if((isset($this->request->data)) && !empty($this->request->data['Message']))
             {
-                $this->Messenger->setMessage($this->request->data['To'], $this->request->data['Subject'],$this->request->data['Message'],$this->Session->check['Userid']);
+                $this->Messenger->setMessage($members,$this->request->data['To'], 
+                                            $this->request->data['Subject'],
+                                            $this->request->data['Message'],
+                                            $id);
                 $this->redirect(array('controller' => 'Messenger', 'action' => 'inbox'));
             }
         }
@@ -36,7 +41,7 @@ class MessengerController extends AppController{
     function inbox()
     {
         $this->loadModel('Messenger');
-        $notifinbox=$this->Messenger->getNotif($this->request->session()->read['id']);
+        $notifinbox=$this->Messenger->getNotif($this->request->session()->read('id'));
         $this->set('notifinbox', $notifinbox);
         $this->set('idmessage', " ");
             
@@ -51,7 +56,7 @@ class MessengerController extends AppController{
         {
             $param='trash';
         }
-        $this->set('messages', $this->Messenger->getMessages($this->request->Session()->read['id'],$param));
+        $this->set('messages', $this->Messenger->getMessages($this->request->Session()->read('id'),$param));
     }
         
         
