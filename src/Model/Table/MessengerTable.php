@@ -37,7 +37,7 @@ class MessengerTable extends Table{
                 . 'AND message.trashed=0 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
-        }else if($param=='trashed')
+        }else if($param=='trash')
         {
             $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '

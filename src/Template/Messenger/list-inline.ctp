@@ -12,9 +12,5 @@
 </ul>
 <div class="navigation">
     <div class="pager-wrapper">
-        <ul class="pager">
-            <?= $this->Html->link('<li class="fa fa-angle-left"></li>', array('action' => 'readmessage', '?' =>array('param' => '0')), array('escape'=>false)) ?>
-            <?= $this->Html->link('<li class="fa fa-angle-right"></li>', array('action' => 'readmessage', '?' =>array('param' => '1')), array('escape'=>false)) ?>
-        </ul>
     </div>
 </div>
