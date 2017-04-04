@@ -75,16 +75,16 @@ class AppController extends Controller
 		$controller = $this->request->params['controller'];
 		$action = $this->request->params['action'];
 		
-		if($session->check('id') AND !($controller=='user' AND ($action=='index' OR $action=='login' OR $action=='register' )))
+		if($session->check('id') AND !($controller=='User' AND ($action=='index' OR $action=='login' OR $action=='register' )))
         {
 			$id=$session->read('id');
 			$this->loadModel('Calendar');
 			$this->set('family', $this->Calendar->recup_family($id));
 			
         }
-        else
+        if(!$session->check('id') AND !($controller=='User' AND ($action=='index' OR $action=='login' OR $action=='register' )))
         {
-			$this->redirect(array('controller' => 'user', 'action' => 'index'));
+			$this->redirect(array('controller' => 'User', 'action' => 'index'));
 		}
 	}
 }
