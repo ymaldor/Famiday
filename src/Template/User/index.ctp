@@ -2,7 +2,7 @@
 	<div class="wrapper full-page-wrapper page-auth page-login text-center">
 		<div class="inner-page">
 			<div class="logo">
-				<a href="index.html"><img src="assets/img/kingadmin-logo.png" alt="" /></a>
+				<a href="index.html"><?= $this->Html->image('kingadmin-logo.png'); ?></a>
 			</div>
 			<button type="button" class="btn btn-auth-facebook"><span>Login via Facebook</span></button>
 			<div class="separator"><span>OR</span></div>

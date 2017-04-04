@@ -71,29 +71,20 @@ class AppController extends Controller
     {
 		//Session
 		//$id = $session->read('id');
-		 $session=$this->request->session();
-        
-        if ( 
-                $this->request->params['action']=='index' 
-                || $this->request->params['action']!='login' 
-                || $this->request->params['action']!='register')
+		$session=$this->request->session();
+		$controller = $this->request->params['controller'];
+		$action = $this->request->params['action'];
+		
+        if($session->check('id') AND !($controller=='User' AND ($action=='index' OR $action=='login' OR $action=='register' )))
         {
-            if(($session->check('id')==null || !$session->check('id')) 
-                && $this->request->params['controller']!='user' )
-            {
-            
-                $this->redirect(array('controller'=>'user', '?' => array('url' => $this->request->params['action'])));
-            }
+            $id=$session->read('id');
+            $this->loadModel('Calendar');
+            $this->set('family', $this->Calendar->recup_family($id));
+			
         }
-        if($session->check('id'))
+        if(!$session->check('id') AND !($controller=='User' AND ($action=='index' OR $action=='login' OR $action=='register' )))
         {
-	$id=$session->read('id');
-        $this->loadModel('Calendar');
-		$this->set('family', $this->Calendar->recup_family($id));
+            $this->redirect(array('controller' => 'User', 'action' => 'index'));
+        }
     }
 }
-}
-
-
-
-
