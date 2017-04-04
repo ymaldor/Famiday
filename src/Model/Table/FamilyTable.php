@@ -31,8 +31,8 @@ class FamilyTable extends Table{
 		{
 			$iduser=null;
 		}
-		if($idfam==false){
-		
+		if($idfam==false)
+		{
 			$table=TableRegistry::get('personne');
 			$a=$table->find()->select(['idfamily'])->where(['userid'=>$idlog])->toArray();
 			$idfam=$a[0]['idfamily'];
@@ -40,7 +40,9 @@ class FamilyTable extends Table{
 		$table = TableRegistry::get('personne'); //nom de la table
         $id=md5(uniqid(rand(),true));
 		
-		$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
+		//$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
+		$color = ["#ac725e", "#d06b64", "#f83a22", "#fa573c", "#ff7537", "#ffad46", "#42d692", "#16a765", "#7bd148", "#b3dc6c", "#fbe983", "#fad165", "#92e1c0"];
+		
         $tocard=$table->newEntity();
 		$tocard->id=$id;
 		$tocard->userid=$iduser;
@@ -49,18 +51,14 @@ class FamilyTable extends Table{
 		$tocard->nom=$p['nom'];
 		$tocard->adress=$p['adress'];
 		$tocard->phone=$p['phone'];
-		$tocard->datebirth=$date;
+		//$tocard->datebirth=$date;
 		$tocard->about=$p['about'];
-		$tocard->Sexe=$p['Sexe'];
-		$tocard->Statut=$p['Statut'];
-		$tocard->Responsable=$p['Responsable'];
+		$tocard->sexe=$p['Sexe'];
+		$tocard->statut=$p['Statut'];
+		$tocard->color=$color[rand(0, count($color)-1)];
+		$tocard->responsable=$p['Responsable'];
 		$table->save($tocard);
-	
-	
 	}
-	
-	
-	
 		
 	public function getfamily($id)
 	{

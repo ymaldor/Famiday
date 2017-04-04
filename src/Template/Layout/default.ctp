@@ -33,8 +33,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->Html->css('bootstrap.min.css') ?>
 		<?= $this->Html->css('font-awesome.min.css') ?>
 		<?= $this->Html->css('main.min.css') ?>
-		
-		<?= $this->Html->css('calendar.css') ?>
 		<!--[if lte IE 9]>
 			<?= $this->Html->css('main-ie.css') ?>
 			<?= $this->Html->css('main-ie-part2.css') ?>
@@ -53,10 +51,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		<?= $this->Html->script('plugins/summernote/summernote.min.js') ?>
 		<?= $this->Html->script('plugins/select2/select2.min.js') ?>
 		<?= $this->Html->script('king-page.js') ?>
-		
-		
-		
-	</head>
+		<?= $this->Html->script('plugins/bootstrap-datepicker/bootstrap-datepicker.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-switch/bootstrap-switch.min.js') ?>
+		<?= $this->Html->script('plugins/jquery-maskedinput/jquery.masked-input.min.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-multiselect/bootstrap-multiselect.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js') ?>
+		<?= $this->Html->script('plugins/daterangepicker/daterangepicker.js') ?>
+		<?= $this->Html->script('plugins/moment/moment.min.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-slider/bootstrap-slider.js') ?>
+		<?= $this->Html->script('plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') ?>
+		<?= $this->Html->script('king-elements.js') ?>
 
 	<?php if(!isset($inscription)) { echo '
 		<body class="sidebar-fixed topnav-fixed fullcalendar">
