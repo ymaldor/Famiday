@@ -73,10 +73,17 @@ class AppController extends Controller
 		//$id = $session->read('id');
 		 $session=$this->request->session();
         
-        
-        if(($session->check('id')==null || !$session->check('id')) && (($this->request->params['controller']!='user' && $this->request->params['action']!='index' && $this->request->params['action']!='login' && $this->request->params['action']!='register') ))
+        if ( 
+                $this->request->params['action']=='index' 
+                || $this->request->params['action']!='login' 
+                || $this->request->params['action']!='register')
         {
-            $this->redirect(array('controller'=>'user', '?' => array('url' => $this->request->params['action'])));
+            if(($session->check('id')==null || !$session->check('id')) 
+                && $this->request->params['controller']!='user' )
+            {
+            
+                $this->redirect(array('controller'=>'user', '?' => array('url' => $this->request->params['action'])));
+            }
         }
         if($session->check('id'))
         {

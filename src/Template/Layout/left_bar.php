@@ -19,7 +19,7 @@
 				</li>
 				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Gestion famille</span>', array('controller' => 'Family','action'=> 'gestion'), array('escape' => false)); ?></li>
 				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Message</span>', array('controller' => 'Messenger','action'=> 'inbox'), array('escape' => false)); ?></li>
-				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Déconnexion</span>', array('controller' => 'User','action'=> 'deconnexion'), array('escape' => false)); ?></li>
+				<li><?= $this->Html->link('<i class="fa fa-power-off"></i><span class="text">Déconnexion</span>', array('controller' => 'User','action'=> 'disconnect'), array('escape' => false)); ?></li>
 			</ul>
 		</nav>
 		<!-- /main-nav -->
