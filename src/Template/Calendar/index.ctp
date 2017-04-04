@@ -163,6 +163,8 @@
 			<div class="calendar"></div>
 			<!-- king-components.js **ligne 500** -->
 
+			
+		
 		<script type="text/javascript">
 			//*******************************************
 			/*	CALENDAR PAGE

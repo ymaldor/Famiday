@@ -78,13 +78,13 @@ class AppController extends Controller
         {
             $this->redirect(array('controller'=>'user', '?' => array('url' => $this->request->params['action'])));
         }
-        if($session->check('id'))
+        else
         {
-	$id=$session->read('id');
-        $this->loadModel('Calendar');
-		$this->set('family', $this->Calendar->recup_family($id));
-    }
-}
+			$id=$session->read('id');
+			$this->loadModel('Calendar');
+			$this->set('family', $this->Calendar->recup_family($id));
+		}
+	}
 }
 
 
