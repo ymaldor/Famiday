@@ -1,3 +1,8 @@
+<?php 
+
+use Cake\I18n\Time;
+?>
+
 <div class="main-header" style="margin-bottom: 15px;">
 	<h2>Inbox</h2>
 	<em></em>
@@ -6,14 +11,6 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-2">
             <!-- search box -->
-            <form class="searchbox">
-                <div class="input-group input-group-sm">
-                    <input type="search" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i> Search</button>
-                    </span>
-                </div>
-            </form>
             <!-- end search box -->
         </div>
     </div>
@@ -47,13 +44,6 @@
                             <col class="col-from">
                         </colgroup>
                         <tbody>
-                            <tr>
-                                <td><span class="from">Alice</span></td>
-                                <td><span class="message-label label2">New User</span>
-                                    <span class="title">New User Registration</span> <span class="preview">- A new user has been registered on your site but not yet activated. You can activate this user on </span></td>
-                             
-                                <td><span class="timestamp">12:01 PM</span></td>
-                            </tr>
                             <?php
                                 echo $this->Form->create('checkbox');
                                 for($i=0;$i<count($messages);$i++)
@@ -71,17 +61,18 @@
                                     $time=explode(':',$datetime[1]);
                                     $date=*/
                                     
-                                    if(!$messages[$i]['isread'])
+                                    if(!$messages[$i]['read'])
                                     {
-                                echo "<tr class=\"unread\">";
+                                    echo "<tr class=\"unread\">";
                                     }else {
-                                        echo "<tr class=\"read\">";
+                                        $tr=$tr."<tr class=\"read\">";
                                     }
                                     echo ""
                                     . "<td><span class=\"from\">".$messages[$i]['mail']."</span></td>"
                                     . "<td><span class=\"title\">".$messages[$i]['object']."</span><span class=\"preview\"></span></td>"
-                                    . "<td><span class=\"timestamp\">".$date."</span></td>"
-                                . "</tr>"; 
+                                    . "<td><span class=\"timestamp\">".$date."</span></td><td>";
+                                    echo $this->Html->link('lire',array('controller'=>'Messenger', 'action'=>'readmessage', '?'=>[$messages[$i]['id'], $messages[$i]['mail']]));
+                                echo "</td></tr>";
                                 }
                             
                                 echo $this->Form->end();

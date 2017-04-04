@@ -17,30 +17,29 @@ class MessengerTable extends Table{
     
     public function getMessages($myid, $param)
     {
-        $myid="douille";
         
         $connection = ConnectionManager::get('default');
-        if($param='inbox')
+        if($param=='inbox')
         {
-        $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+        $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE message_sent.to=user.id '
                 . 'AND user.id="'.$myid.'" '
                 . 'AND message.trashed=0 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
-        }else if($param='sent')
+        }else if($param=='sent')
         {
-            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+            $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE message_sent.from=user.id '
                 . 'AND user.id="'.$myid.'" '
                 . 'AND message.trashed=0 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
-        }else if($param='trashed')
+        }else if($param=='trashed')
         {
-            $messages=$connection->execute('SELECT message.message, message.object, message.datemessage, message.read, user.mail '
+            $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
                 . 'FROM `message_sent`, `message`, `user` '
                 . 'WHERE (message_sent.to=user.id OR message_sent.from=user.id) '
                 . 'AND user.id="'.$myid.'" '
@@ -97,5 +96,11 @@ class MessengerTable extends Table{
         
         $string=$string[0]['COUNT(`read`)'];
         return $string;
+    }
+    public function getMessage($idmsg)
+    {
+        $table=  TableRegistry::get('Message');
+        $msg=$table->find()->where(['id'=>$idmsg])->toArray();
+        return $msg[0];
     }
 }

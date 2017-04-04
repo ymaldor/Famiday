@@ -46,13 +46,13 @@ class MessengerController extends AppController{
         $this->set('idmessage', " ");
             
         $param=isset($this->request->query['param'])         ? $this->request->query['param']         : 1;
-        if($param=1)
+        if($param==1)
         {
             $param='inbox';
-        }else if ($param=2)
+        }else if ($param==2)
         {
             $param='sent';
-        }else if ($param=3)
+        }else if ($param==3)
         {
             $param='trash';
         }
@@ -63,8 +63,12 @@ class MessengerController extends AppController{
     function readmessage()
     {
         
-        $idmessage=isset($this->request->query['param'])         ? $this->request->query['param']         : "machin";
+        $idmessage=isset($this->request->query[0])         ? $this->request->query[0]         : null;
         $this->set('idmessage', $idmessage);
-        $this->set('notifinbox', $this->Messenger->getNotif($this->Session->check['userid']));
+        $mailfrom=isset($this->request->query[1])         ? $this->request->query[1]         : "error";
+        $this->set('mailfrom', $mailfrom);
+        $this->set('notifinbox', $this->Messenger->getNotif($this->request->Session()->read('id')));
+        $message=$this->Messenger->getMessage($idmessage);
+        $this->set('message', $message);
     }
 }
