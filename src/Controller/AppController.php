@@ -83,6 +83,7 @@ class AppController extends Controller
 	$id=$session->read('id');
         $this->loadModel('Calendar');
 		$this->set('family', $this->Calendar->recup_family($id));
+        }
     }
 }
 
