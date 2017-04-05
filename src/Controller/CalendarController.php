@@ -55,10 +55,11 @@ class CalendarController extends AppController{
 		
 		//Event
 		$here = explode("/", $this->request->here());
+		$nb = count($here)-1;
 		
-		if(isset($here[4]) and intval($here[4])!=0 and $this->Calendar->is_family($id, intval($here[4])))
+		if(isset($here[$nb]) and intval($here[$nb])!=0 and $this->Calendar->is_family($id, intval($here[$nb])))
 		{
-			$idpersonne = intval($here[4]);
+			$idpersonne = intval($here[$nb]);
 			$this->set('event', $this->Calendar->recup_event($idpersonne));
 			
 			$session->write('idpersonne',$idpersonne);
