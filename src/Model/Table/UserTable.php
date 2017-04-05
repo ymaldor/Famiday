@@ -55,4 +55,9 @@ class UserTable extends Table{
         $string=$table->find()->where(['id !='=>$id])->toArray();
         return $string;
     }
+    public function getusermail($id){
+        $table= TableRegistry::get('user');
+        $mail=$table->get($id);
+        return $mail->mail;
+    }
 }

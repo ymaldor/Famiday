@@ -69,6 +69,7 @@ class AppController extends Controller
 	
 	public function beforeFilter(Event $event)
     {
+        $this->loadModel('User');
 		//Session
 		//$id = $session->read('id');
 		$session=$this->request->session();
@@ -80,6 +81,8 @@ class AppController extends Controller
             $id=$session->read('id');
             $this->loadModel('Calendar');
             $this->set('family', $this->Calendar->recup_family($id));
+            $usermail=$this->User->getusermail($id);
+            $this->set('emailmember', $usermail);
 			
 			$this->loadModel('Family');
 			if(!$this->Family->isFamily($id) AND !($controller=='Family' AND $action=='creation') )
