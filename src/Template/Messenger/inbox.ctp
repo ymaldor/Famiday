@@ -5,7 +5,19 @@ use Cake\I18n\Time;
 
 <div class="main-header" style="margin-bottom: 15px;">
 	<h2>Inbox</h2>
-	<em></em>
+	<em><?php 
+        switch ($param)
+        {
+            case 1 : echo "Messages received";
+                break;
+            case 2 : echo "Messages sent";
+                break;
+            case 3 : echo "Messages trashed";
+                break;
+            default : echo "Messages received";
+                break;
+        }
+        ?></em>
 </div>
 <div class="inbox">
     <div class="row">
