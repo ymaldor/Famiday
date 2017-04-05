@@ -29,20 +29,8 @@ class UserTable extends Table{
         $user->datecreation=$now;
         $user->online=0;
         $table->save($user);
-        /*$query=$table->query();
-        $query->insert([
-            'mail',
-            'password',
-            'datecreation',
-            'online'
-            ])
-        ->values([
-            'mail'=>$mail,
-            'password'=>$password,
-            'datecreation'=>$now,
-            'online'=>0
-            ])
-        ->execute();*/
+		
+		return $id;
     }
     /*public function beforeSave($options = array()) {
     if (isset($this->data[$this->alias]['password'])) {

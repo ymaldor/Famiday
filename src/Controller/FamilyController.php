@@ -25,8 +25,12 @@ class FamilyController extends AppController{
 				$this->family->addpersonne($this->request->data,$idfam,$id,false);
 				$this->set('fam',$this->family->getfamily($id));
 				
-				$this->redirect(array('controller' => 'User', 'action' => 'index'));
+				$this->redirect(array('controller' => 'Family', 'action' => 'gestion'));
 			}
+		}
+		else
+		{
+			$this->redirect(array('controller' => 'Family', 'action' => 'gestion'));
 		}
 	}
 	
@@ -40,9 +44,10 @@ class FamilyController extends AppController{
 			if($this->request->is('post'))
 			{
 				$this->family->addpersonne($this->request->data,false,false,$id);
+				$this->redirect(array('controller' => 'Family', 'action' => 'gestion'));
 			}
-			$b=$this->family->getfamily($id);
-			$this->set('fam',$b);
+			
+			$this->set('fam',$this->family->getfamily($id));
 		}
 	}
 	

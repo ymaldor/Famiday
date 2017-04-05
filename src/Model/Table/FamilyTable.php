@@ -38,13 +38,11 @@ class FamilyTable extends Table{
 			$idfam=$a[0]['idfamily'];
 		}
 		$table = TableRegistry::get('personne'); //nom de la table
-        $id=md5(uniqid(rand(),true));
 		
 		//$date=$p['datebirth']['year'].'-'.$p['datebirth']['month'].'-'.$p['datebirth']['day'];
 		$color = ["#ac725e", "#d06b64", "#f83a22", "#fa573c", "#ff7537", "#ffad46", "#42d692", "#16a765", "#7bd148", "#b3dc6c", "#fbe983", "#fad165", "#92e1c0"];
 		
         $tocard=$table->newEntity();
-		$tocard->id=$id;
 		$tocard->userid=$iduser;
 		$tocard->idfamily=$idfam;
 		$tocard->prenom=$p['prenom'];

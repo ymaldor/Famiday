@@ -41,28 +41,24 @@ class UserController extends AppController{
     function register()
     {
         $this->set('inscription',1);
-
-
+		
         if ($this->request->is('post'))
         {
             if(isset($this->request->data))
             {
-                        $this->loadModel('User');
-                        $id=$this->User->addUser(
-                            $this->request->data['mail'],
-                            $this->request->data['password']
-                            );   
-                    }
+				$this->loadModel('User');
+				$id=$this->User->addUser(
+					$this->request->data['mail'],
+					$this->request->data['password']
+					);
+			}
+			
             $this->request->Session()->write('mail',$this->request->data['mail']);
             $this->request->Session()->write('id',$id);       
             $this->redirect(array('controller' => 'calendar', 'action' => 'index'));
-                        
-                
-                }
-                
+		}       
 	}
 	
-    
     function login()
     {
         $this->set('inscription',1);
@@ -78,10 +74,6 @@ class UserController extends AppController{
         }
         $this->redirect(array('controller' => 'user', 'action' => 'index'));
     } 
-
-
-
-
     
     public function logout() {
         return $this->redirect($this->Auth->logout());
