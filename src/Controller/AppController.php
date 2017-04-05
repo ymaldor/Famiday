@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -68,7 +69,9 @@ class AppController extends Controller
     }
 	
 	public function beforeFilter(Event $event)
-    {
+    {$skdebug = 2;
+if ($_SERVER["REMOTE_ADDR"]!= '::1') $skdebug = 0;
+Configure::write('debug', $skdebug);
         $this->loadModel('User');
 		//Session
 		//$id = $session->read('id');
