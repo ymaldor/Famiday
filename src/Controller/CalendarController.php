@@ -86,51 +86,59 @@ class CalendarController extends AppController{
 	
 	function ical()
     {
-		$calendrier = file_get_contents("http://86.245.24.241:6121/ICS/example.ics");
-		
-		//Expressions régulieres
-		$regExpMatch = "/SUMMARY:(.*)/";
-		$regExpDDate = "/DTSTART:(.*)/";
-		$regExpFDate = "/DTEND:(.*)/";
-		$regExpDesc = "/DESCRIPTION:(.*)/";
-		
-		$n = preg_match_all($regExpMatch, $calendrier, $matchTableau, PREG_PATTERN_ORDER);
-		preg_match_all($regExpDDate, $calendrier, $ddateTableau, PREG_PATTERN_ORDER);
-		preg_match_all($regExpFDate, $calendrier, $fdateTableau, PREG_PATTERN_ORDER);
-		preg_match_all($regExpDesc, $calendrier, $descTableau, PREG_PATTERN_ORDER);
-		
-		$event = [];
-		
-		for($j=0; $j<$n; $j++)
+		//Formulaire
+		if($this->request->is('post'))
 		{
-			//Récupération des données
-			$dannee = substr($ddateTableau[0][$j], 8, 4);
-			$dmois = substr($ddateTableau[0][$j], 12, 2);
-			$djour = substr($ddateTableau[0][$j], 14, 2);
-			$dheure = substr($ddateTableau[0][$j], 17, 2);
-			$dmin = substr($ddateTableau[0][$j], 19, 2);
-			
-			$fannee = substr($fdateTableau[0][$j], 6, 4);
-			$fmois = substr($fdateTableau[0][$j], 10, 2);
-			$fjour = substr($fdateTableau[0][$j], 12, 2);
-			$fheure = substr($fdateTableau[0][$j], 15, 2);
-			$fmin = substr($fdateTableau[0][$j], 17, 2);
-			
-			$match = substr($matchTableau[0][$j], 8);
-			$desc = substr($descTableau[0][$j], 12); //Mise en forme
-			
-			//Affichage
-			$event[$j][0] = $ddateTableau[0][$j];
-			$event[$j][11] = $fdateTableau[0][$j];
-			
-			$event[$j][1] = $match;
-			$event[$j][2] = $dannee."-".$dmois."-".$djour." ".$dheure.":".$dmin.":00";
-			$event[$j][3] = $fannee."-".$fmois."-".$fjour." ".$fheure.":".$fmin.":00";
-			$event[$j][10] = "#7bd148";
+			if(isset($this->request->data))
+			{
+				//$calendrier = file_get_contents("http://86.245.24.241:6121/ICS/example.ics");
+				$calendrier = file_get_contents($this->request->data['lien']);
+				
+				//Expressions régulieres
+				$regExpMatch = "/SUMMARY:(.*)/";
+				$regExpDDate = "/DTSTART:(.*)/";
+				$regExpFDate = "/DTEND:(.*)/";
+				$regExpDesc = "/DESCRIPTION:(.*)/";
+				
+				$n = preg_match_all($regExpMatch, $calendrier, $matchTableau, PREG_PATTERN_ORDER);
+				preg_match_all($regExpDDate, $calendrier, $ddateTableau, PREG_PATTERN_ORDER);
+				preg_match_all($regExpFDate, $calendrier, $fdateTableau, PREG_PATTERN_ORDER);
+				preg_match_all($regExpDesc, $calendrier, $descTableau, PREG_PATTERN_ORDER);
+				
+				$event = [];
+				
+				for($j=0; $j<$n; $j++)
+				{
+					//Récupération des données
+					$dannee = substr($ddateTableau[0][$j], 8, 4);
+					$dmois = substr($ddateTableau[0][$j], 12, 2);
+					$djour = substr($ddateTableau[0][$j], 14, 2);
+					$dheure = substr($ddateTableau[0][$j], 17, 2);
+					$dmin = substr($ddateTableau[0][$j], 19, 2);
+					
+					$fannee = substr($fdateTableau[0][$j], 6, 4);
+					$fmois = substr($fdateTableau[0][$j], 10, 2);
+					$fjour = substr($fdateTableau[0][$j], 12, 2);
+					$fheure = substr($fdateTableau[0][$j], 15, 2);
+					$fmin = substr($fdateTableau[0][$j], 17, 2);
+					
+					$match = substr($matchTableau[0][$j], 8);
+					$desc = substr($descTableau[0][$j], 12); //Mise en forme
+					
+					//Affichage
+					$event[$j][0] = $ddateTableau[0][$j];
+					$event[$j][11] = $fdateTableau[0][$j];
+					
+					$event[$j][1] = $match;
+					$event[$j][2] = $dannee."-".$dmois."-".$djour." ".$dheure.":".$dmin.":00";
+					$event[$j][3] = $fannee."-".$fmois."-".$fjour." ".$fheure.":".$fmin.":00";
+					$event[$j][10] = "#7bd148";
+				}
+				
+				//debug($event);
+				$this->set('event', $event);
+			}
 		}
-		
-		//debug($event);
-		$this->set('event', $event);
     }
 	
 	function suppr()

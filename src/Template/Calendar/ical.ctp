@@ -23,9 +23,14 @@
 								<div id="collapseOne" class="panel-collapse collapse">
 									<div class="panel-body">
 									<!--DEBUT FORM-->
+									<p>
+										Exemple de flux: 
+										<?= $this->Html->link('http://86.245.24.241:6121/ICS/example.ics', array('controller' => 'Calendar','action'=> 'ical'), array('escape' => false)); ?>
+									</p>
 									<?= $this->Form->create('Formulaire', array('type'=>'post'))?>
-									<?= $this->Form->input('nom_event',array(	'type'=>'text',
+									<?= $this->Form->input('lien',array(	'type'=>'text',
 																		'label'=>False,
+																		'id'=>'lien',
 																		'class'=>'form-control',
 																		'style'=>'margin-bottom:15px;',
 																		'placeholder'=>'Lien du flux iCal')) ?>
