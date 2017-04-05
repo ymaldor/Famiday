@@ -41,7 +41,7 @@ use Cake\I18n\Time;
                         <colgroup>
                             <col class="col-from">
                             <col class="col-from">
-                            <col class="col-title">
+                            <col class="col-lg-10">
                             <col class="col-lg-2">
                             <col class="col-lg-2">
                             <col class="col-lg-2">
@@ -86,14 +86,14 @@ use Cake\I18n\Time;
                                     . "<td><span class=\"from\">".$messages[$i]['mail']."</span></td>"
                                     . "<td><span class=\"title\">".$messages[$i]['object']."</span><span class=\"preview\"></span></td>"
                                     . "<td><span class=\"timestamp\">".$date."</span></td><td>";
-                                    echo $this->Html->link('lire',array('controller'=>'Messenger', 'action'=>'readmessage', '?'=>[$messages[$i]['id'], $messages[$i]['mail'], $param]));
+                                    echo $this->Html->link('<i class="fa fa-inbox col-md-offset-5"></i>',array('controller'=>'Messenger', 'action'=>'readmessage', '?'=>[$messages[$i]['id'], $messages[$i]['mail'], $param]), array('escape'=>false));
                                     if($param==1){
                                     echo "</td><td>";
-                                    echo $this->Html->link('Delete',array('controller'=>'Messenger', 'action'=>'trashmessage', '?'=>[$messages[$i]['id'], $param]));
+                                    echo $this->Html->link('<i class="fa fa-trash col-md-offset-5"></i>',array('controller'=>'Messenger', 'action'=>'trashmessage', '?'=>[$messages[$i]['id'], $param]), array('escape'=>false));
                                     }else if($param==3)
                                     {
                                     echo "</td><td>";
-                                    echo $this->Html->link('Delete',array('controller'=>'Messenger', 'action'=>'deletemessage', '?'=>[$messages[$i]['id'], $param]));
+                                    echo $this->Html->link('<i class="fa fa-trash col-md-offset-5"></i>',array('controller'=>'Messenger', 'action'=>'deletemessage', '?'=>[$messages[$i]['id'], $param]), array('escape'=>false));
                                     }
                                     echo "</td></tr>";
                                 }
