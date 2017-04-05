@@ -11,14 +11,14 @@
 						for($i=0;$i<count($family);$i++)
 						{
 							echo "<li>";
-							echo $this->Html->link('<span class="text">'.$family[$i][1].' '.$family[$i][2].'</span>', array('controller' => 'Calendar','action'=> 'index/'.$family[$i][0]), array('escape' => false));
+							echo $this->Html->link('<i class="fa fa-calendar"></i><span class="text">'.$family[$i][1].' '.$family[$i][2].'</span>', array('controller' => 'Calendar','action'=> 'index/'.$family[$i][0]), array('escape' => false));
 							echo "</li>";
 						}
 						?>
 					</ul> 
 				</li>
-				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Gestion famille</span>', array('controller' => 'Family','action'=> 'gestion'), array('escape' => false)); ?></li>
-				<li><?= $this->Html->link('<i class="fa fa-home"></i><span class="text">Message</span>', array('controller' => 'Messenger','action'=> 'inbox'), array('escape' => false)); ?></li>
+				<li><?= $this->Html->link('<i class="fa fa-group"></i><span class="text">Gestion famille</span>', array('controller' => 'Family','action'=> 'gestion'), array('escape' => false)); ?></li>
+				<li><?= $this->Html->link('<i class="fa fa-envelope"></i><span class="text">Message</span>', array('controller' => 'Messenger','action'=> 'inbox'), array('escape' => false)); ?></li>
 				<li><?= $this->Html->link('<i class="fa fa-power-off"></i><span class="text">Déconnexion</span>', array('controller' => 'User','action'=> 'disconnect'), array('escape' => false)); ?></li>
 			</ul>
 		</nav>
