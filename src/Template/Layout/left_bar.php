@@ -19,6 +19,7 @@
 				</li>
 				<li><?= $this->Html->link('<i class="fa fa-group"></i><span class="text">Gestion famille</span>', array('controller' => 'Family','action'=> 'gestion'), array('escape' => false)); ?></li>
 				<li><?= $this->Html->link('<i class="fa fa-envelope"></i><span class="text">Message</span>', array('controller' => 'Messenger','action'=> 'inbox'), array('escape' => false)); ?></li>
+				<li><?= $this->Html->link('<i class="fa fa-file-text"></i><span class="text">Flux iCal</span>', array('controller' => 'Calendar','action'=> 'ical'), array('escape' => false)); ?></li>
 				<li><?= $this->Html->link('<i class="fa fa-power-off"></i><span class="text">Déconnexion</span>', array('controller' => 'User','action'=> 'disconnect'), array('escape' => false)); ?></li>
 			</ul>
 		</nav>

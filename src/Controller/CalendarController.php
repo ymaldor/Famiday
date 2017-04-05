@@ -84,6 +84,14 @@ class CalendarController extends AppController{
 		}
     }
 	
+	function ical()
+    {
+		
+		
+		
+		
+    }
+	
 	function suppr()
     {
 		//Formulaire
