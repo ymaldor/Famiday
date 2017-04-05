@@ -19,6 +19,7 @@ class MessengerTable extends Table{
     {
         
         $connection = ConnectionManager::get('default');
+        $table=  TableRegistry::get('Message');
         if($param=='inbox')
         {
         $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
@@ -28,6 +29,14 @@ class MessengerTable extends Table{
                 . 'AND message.trashed=0 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
+        for($i=0;$i<count($messages);$i++)
+        {
+            $table=TableRegistry::get('message_sent');
+            $mailfrom=$table->find()->select('from')->where(['message'=>$messages[$i]['id']])->toArray()[0]['from'];
+            $table=TableRegistry::get('user');
+            $mailfrom=$table->find()->select('mail')->where(['id'=>$mailfrom])->toArray()[0]['mail'];
+            $messages[$i]['mailfrom']=$mailfrom;
+        }
         }else if($param=='sent')
         {
             $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
@@ -37,6 +46,15 @@ class MessengerTable extends Table{
                 . 'AND message.trashed=0 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
+        for($i=0;$i<count($messages);$i++)
+        {
+            $table=TableRegistry::get('message_sent');
+            $mailfrom=$table->find()->select('to')->where(['message'=>$messages[$i]['id']])->toArray()[0]['to'];
+            $table=TableRegistry::get('user');
+            $mailfrom=$table->find()->select('mail')->where(['id'=>$mailfrom])->toArray()[0]['mail'];
+            $messages[$i]['mailfrom']=$messages[$i]['mail'];
+            $messages[$i]['mail']=$mailfrom;
+        }
         }else if($param=='trash')
         {
             $messages=$connection->execute('SELECT message.id,message.message, message.object, message.datemessage, message.read, user.mail '
@@ -46,6 +64,14 @@ class MessengerTable extends Table{
                 . 'AND message.trashed=1 '
                 . 'AND message.id=message_sent.message'
                 . '')->fetchAll('assoc');
+        for($i=0;$i<count($messages);$i++)
+        {
+            $table=TableRegistry::get('message_sent');
+            $mailfrom=$table->find()->select('from')->where(['message'=>$messages[$i]['id']])->toArray()[0]['from'];
+            $table=TableRegistry::get('user');
+            $mailfrom=$table->find()->select('mail')->where(['id'=>$mailfrom])->toArray()[0]['mail'];
+            $messages[$i]['mailfrom']=$mailfrom;
+        }
         }
         return $messages;
         
@@ -102,5 +128,28 @@ class MessengerTable extends Table{
         $table=  TableRegistry::get('Message');
         $msg=$table->find()->where(['id'=>$idmsg])->toArray();
         return $msg[0];
+    }
+    public function readmsg($idmsg)
+    {
+        $table=  TableRegistry::get('Message');
+        $msg=$table->get($idmsg);
+        $msg->read=1;
+        $table->save($msg);
+    }
+    public function trashmsg($idmsg)
+    {
+        $table=  TableRegistry::get('Message');
+        $msg=$table->get($idmsg);
+        $msg->trashed=1;
+        $table->save($msg);
+    }
+    public function deletemsg($idmsg)
+    {
+        $table=TableRegistry::get('message_sent');
+        $msg=$table->find()->select('id')->where(['message'=>$idmsg])->toArray()[0]['id'];
+        $table->delete($table->get($msg));
+        $table=  TableRegistry::get('Message');
+        $msg=$table->get($idmsg);
+        $table->delete($msg);
     }
 }

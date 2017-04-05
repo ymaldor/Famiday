@@ -46,6 +46,7 @@ class MessengerController extends AppController{
         $this->set('idmessage', " ");
             
         $param=isset($this->request->query['param'])         ? $this->request->query['param']         : 1;
+        $this->set('param', $param);
         if($param==1)
         {
             $param='inbox';
@@ -67,8 +68,29 @@ class MessengerController extends AppController{
         $this->set('idmessage', $idmessage);
         $mailfrom=isset($this->request->query[1])         ? $this->request->query[1]         : "error";
         $this->set('mailfrom', $mailfrom);
+        $param=isset($this->request->query[2])         ? $this->request->query[2]         : "error";
+        if($param==1){
+        $this->Messenger->readmsg($idmessage);}
         $this->set('notifinbox', $this->Messenger->getNotif($this->request->Session()->read('id')));
         $message=$this->Messenger->getMessage($idmessage);
         $this->set('message', $message);
+    }
+    function trashmessage()
+    {
+        
+        $idmessage=isset($this->request->query[0])         ? $this->request->query[0]         : null;
+        $param=isset($this->request->query[1])         ? $this->request->query[1]         : "error";
+        if($param==1){
+        $this->Messenger->trashmsg($idmessage);}
+        $this->redirect(['controller'=>'Messenger', 'action'=>'inbox', '?'=>$param]);
+    }
+    function deletemessage()
+    {
+        
+        $idmessage=isset($this->request->query[0])         ? $this->request->query[0]         : null;
+        $param=isset($this->request->query[1])         ? $this->request->query[1]         : "error";
+        if($param==3){
+        $this->Messenger->deletemsg($idmessage);}
+        $this->redirect(['controller'=>'Messenger', 'action'=>'inbox', '?'=>$param]);
     }
 }

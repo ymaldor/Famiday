@@ -40,10 +40,24 @@ use Cake\I18n\Time;
                     <table class="table-condensed message-table">
                         <colgroup>
                             <col class="col-from">
-                            <col class="col-title">
                             <col class="col-from">
+                            <col class="col-title">
+                            <col class="col-lg-2">
+                            <col class="col-lg-2">
+                            <col class="col-lg-2">
+                            <col>
                         </colgroup>
                         <tbody>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Subject</th>
+                                <th></th>
+                                <th>Read</th>
+                                <?php if($param!=2){?>
+                                <th>Delete</th>
+                                <?php }?>
+                            </tr>
                             <?php
                                 echo $this->Form->create('checkbox');
                                 for($i=0;$i<count($messages);$i++)
@@ -61,18 +75,27 @@ use Cake\I18n\Time;
                                     $time=explode(':',$datetime[1]);
                                     $date=*/
                                     
-                                    if(!$messages[$i]['read'])
+                                    if(!$messages[$i]['read'] && $param==1)
                                     {
                                     echo "<tr class=\"unread\">";
                                     }else {
-                                        $tr=$tr."<tr class=\"read\">";
+                                        echo "<tr class=\"read\">";
                                     }
                                     echo ""
+                                    . "<td><span class=\"from\">".$messages[$i]['mailfrom']."</span></td>"
                                     . "<td><span class=\"from\">".$messages[$i]['mail']."</span></td>"
                                     . "<td><span class=\"title\">".$messages[$i]['object']."</span><span class=\"preview\"></span></td>"
                                     . "<td><span class=\"timestamp\">".$date."</span></td><td>";
-                                    echo $this->Html->link('lire',array('controller'=>'Messenger', 'action'=>'readmessage', '?'=>[$messages[$i]['id'], $messages[$i]['mail']]));
-                                echo "</td></tr>";
+                                    echo $this->Html->link('lire',array('controller'=>'Messenger', 'action'=>'readmessage', '?'=>[$messages[$i]['id'], $messages[$i]['mail'], $param]));
+                                    if($param==1){
+                                    echo "</td><td>";
+                                    echo $this->Html->link('Delete',array('controller'=>'Messenger', 'action'=>'trashmessage', '?'=>[$messages[$i]['id'], $param]));
+                                    }else if($param==3)
+                                    {
+                                    echo "</td><td>";
+                                    echo $this->Html->link('Delete',array('controller'=>'Messenger', 'action'=>'deletemessage', '?'=>[$messages[$i]['id'], $param]));
+                                    }
+                                    echo "</td></tr>";
                                 }
                             
                                 echo $this->Form->end();
